@@ -1,0 +1,305 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Assets">
+      <UniqueIdentifier>6cde9ea3-2b4d-4df6-b5af-e990d05bb6d2</UniqueIdentifier>
+      <Extensions>ico;cur;bmp;dds;dlg;fbx;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tga;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Library">
+      <UniqueIdentifier>{1165570a-9604-4691-b4e1-b1c4c3d1f3ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\Common">
+      <UniqueIdentifier>682ebd43-4e4e-46be-a2f6-eeef49ae1feb</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\System">
+      <UniqueIdentifier>{9651da4c-0221-4b7c-a086-9f84608e574b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{db21da1c-7227-4aa8-94d1-064167788626}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\Framework">
+      <UniqueIdentifier>{f517e536-5a89-44d3-a943-894917b681fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\Utility">
+      <UniqueIdentifier>{26262578-c79b-41cb-8bee-2d81f45a0cd2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\Graphic2D">
+      <UniqueIdentifier>{cfa1baea-2a8f-4fec-99fb-12c64ebaec38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\Math">
+      <UniqueIdentifier>{c71ea040-d039-4cf9-be19-ae828ae8d63f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shader">
+      <UniqueIdentifier>{ec345d4f-184c-42ac-9f89-f457a87f1494}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shader\VertexShader">
+      <UniqueIdentifier>{e6c55906-fb60-4310-86a1-0ab0fb31190c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shader\PixelShader">
+      <UniqueIdentifier>{35a855b2-9bc6-4b3c-8e28-49de5c1c0812}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shader\Header">
+      <UniqueIdentifier>{c60ca84f-3f9c-4fe8-b6b8-83d475aef2e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\Input">
+      <UniqueIdentifier>{05c296b3-3d6a-4d9c-bde1-f723fe8db1ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\Scene">
+      <UniqueIdentifier>{918e317c-072a-402c-81bc-30b65eeecbf6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\Graphic3D">
+      <UniqueIdentifier>{ee086029-2d06-414d-8929-d0015cf57c7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\Camera">
+      <UniqueIdentifier>{d077e0a2-d040-43cd-9995-63dcc2a4bb40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\Debug">
+      <UniqueIdentifier>{aae399d1-d478-4b9e-9abf-d38de63b5fc5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\Sound">
+      <UniqueIdentifier>{35643e8e-0e43-4e2e-816d-35493764cae2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\Graphic3D\Model">
+      <UniqueIdentifier>{caa69cbc-a6cd-4494-bb3b-f66c1c58da07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{fddedb46-d4d6-4f1a-9985-3fb3e1c4d5a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\FBX">
+      <UniqueIdentifier>{e559f46a-780a-4e99-a5f9-e5842cd98256}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="Library\Common\DeviceResources.h">
+      <Filter>Library\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\Common\StepTimer.h">
+      <Filter>Library\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\System\SingletonBase.h">
+      <Filter>Library\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\Framework\Framework.h">
+      <Filter>Library\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\Utility\BinaryFileLoader.h">
+      <Filter>Library\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\Utility\ShaderManager.h">
+      <Filter>Library\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\Graphic2D\PrimitiveManager2D.h">
+      <Filter>Library\Graphic2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\Math\Math.h">
+      <Filter>Library\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\Input\KeyboardUtil.h">
+      <Filter>Library\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\Input\MouseUtil.h">
+      <Filter>Library\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\Scene\SceneBase.h">
+      <Filter>Library\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\Scene\SceneManager.h">
+      <Filter>Library\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\Graphic2D\Sprite.h">
+      <Filter>Library\Graphic2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\Utility\TextureManager.h">
+      <Filter>Library\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\Graphic3D\PrimitiveManager3D.h">
+      <Filter>Library\Graphic3D</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\Camera\Camera.h">
+      <Filter>Library\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\Math\Transform.h">
+      <Filter>Library\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\Debug\DebugCamera.h">
+      <Filter>Library\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\Sound\SoundManager.h">
+      <Filter>Library\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\Sound\SoundPlayer.h">
+      <Filter>Library\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\Graphic3D\Model\Model.h">
+      <Filter>Library\Graphic3D\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\Graphic3D\Model\ModelDeta.h">
+      <Filter>Library\Graphic3D\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\Graphic3D\Model\ModelManager.h">
+      <Filter>Library\Graphic3D\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\Graphic3D\Model\PMDData.h">
+      <Filter>Library\Graphic3D\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\Utility\String.h">
+      <Filter>Library\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\Graphic3D\Model\ModelMesh.h">
+      <Filter>Library\Graphic3D\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\Graphic3D\Model\ModelBone.h">
+      <Filter>Library\Graphic3D\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\Graphic3D\Model\PMXData.h">
+      <Filter>Library\Graphic3D\Model</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Library\Common\DeviceResources.cpp">
+      <Filter>Library\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Library\Framework\Framework.cpp">
+      <Filter>Library\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Library\Utility\BinaryFileLoader.cpp">
+      <Filter>Library\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Library\Utility\ShaderManager.cpp">
+      <Filter>Library\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Library\Graphic2D\PrimitiveManager2D.cpp">
+      <Filter>Library\Graphic2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Library\Input\KeyboardUtil.cpp">
+      <Filter>Library\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Library\Input\MouseUtil.cpp">
+      <Filter>Library\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Library\Scene\SceneBase.cpp">
+      <Filter>Library\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Library\Scene\SceneManager.cpp">
+      <Filter>Library\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Library\Graphic2D\Sprite.cpp">
+      <Filter>Library\Graphic2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Library\Utility\TextureManager.cpp">
+      <Filter>Library\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Library\Graphic3D\PrimitiveManager3D.cpp">
+      <Filter>Library\Graphic3D</Filter>
+    </ClCompile>
+    <ClCompile Include="Library\Camera\Camera.cpp">
+      <Filter>Library\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Library\Math\Transform.cpp">
+      <Filter>Library\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Library\Debug\DebugCamera.cpp">
+      <Filter>Library\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Library\Sound\SoundManager.cpp">
+      <Filter>Library\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="Library\Sound\SoundPlayer.cpp">
+      <Filter>Library\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="Library\Graphic3D\Model\Model.cpp">
+      <Filter>Library\Graphic3D\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Library\Graphic3D\Model\ModelManager.cpp">
+      <Filter>Library\Graphic3D\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Library\Utility\String.cpp">
+      <Filter>Library\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Library\Graphic3D\Model\ModelMesh.cpp">
+      <Filter>Library\Graphic3D\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Library\Graphic3D\Model\ModelBone.cpp">
+      <Filter>Library\Graphic3D\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Library\Graphic3D\Model\PMXData.cpp">
+      <Filter>Library\Graphic3D\Model</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="resource.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="directx.ico">
+      <Filter>Assets</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="settings.manifest">
+      <Filter>Assets</Filter>
+    </Manifest>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shader\Header\Primitive2D.hlsli">
+      <Filter>Shader\Header</Filter>
+    </None>
+    <None Include="Shader\Header\SpriteHeader.hlsli">
+      <Filter>Shader\Header</Filter>
+    </None>
+    <None Include="Shader\Header\Primitive3D.hlsli">
+      <Filter>Shader\Header</Filter>
+    </None>
+    <None Include="Shader\Header\Model.hlsli">
+      <Filter>Shader\Header</Filter>
+    </None>
+    <None Include="Shader\Header\SkinningModel.hlsli">
+      <Filter>Shader\Header</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Shader\PixelShader\Primitive2DPixelShader.hlsl">
+      <Filter>Shader\PixelShader</Filter>
+    </FxCompile>
+    <FxCompile Include="Shader\VertexShader\Primitive2DVertexShader.hlsl">
+      <Filter>Shader\VertexShader</Filter>
+    </FxCompile>
+    <FxCompile Include="Shader\PixelShader\SpritePixelShader.hlsl">
+      <Filter>Shader\PixelShader</Filter>
+    </FxCompile>
+    <FxCompile Include="Shader\VertexShader\SpriteVertexShader.hlsl">
+      <Filter>Shader\VertexShader</Filter>
+    </FxCompile>
+    <FxCompile Include="Shader\PixelShader\Primitive3DPixelShader.hlsl">
+      <Filter>Shader\PixelShader</Filter>
+    </FxCompile>
+    <FxCompile Include="Shader\VertexShader\Primitive3DVertexShader.hlsl">
+      <Filter>Shader\VertexShader</Filter>
+    </FxCompile>
+    <FxCompile Include="Shader\PixelShader\ModelPixelShader.hlsl">
+      <Filter>Shader\PixelShader</Filter>
+    </FxCompile>
+    <FxCompile Include="Shader\VertexShader\ModelVertexShader.hlsl">
+      <Filter>Shader\VertexShader</Filter>
+    </FxCompile>
+    <FxCompile Include="Shader\PixelShader\SkinningModelPixelShader.hlsl">
+      <Filter>Shader\PixelShader</Filter>
+    </FxCompile>
+    <FxCompile Include="Shader\VertexShader\SkinningModelVertexShader.hlsl">
+      <Filter>Shader\VertexShader</Filter>
+    </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <MeshContentTask Include="Resources\Models\FBX\Dice.FBX">
+      <Filter>Assets</Filter>
+    </MeshContentTask>
+  </ItemGroup>
+</Project>
