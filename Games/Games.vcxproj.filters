@@ -297,9 +297,4 @@
       <Filter>Shader\VertexShader</Filter>
     </FxCompile>
   </ItemGroup>
-  <ItemGroup>
-    <MeshContentTask Include="Resources\Models\FBX\Dice.FBX">
-      <Filter>Assets</Filter>
-    </MeshContentTask>
-  </ItemGroup>
 </Project>

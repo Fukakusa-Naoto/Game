@@ -312,10 +312,6 @@
     <Manifest Include="settings.manifest" />
   </ItemGroup>
   <ItemGroup>
-    <MeshContentTask Include="Resources\Models\FBX\Dice.FBX">
-      <FileType>Document</FileType>
-      <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Resources\\Models\\CMO\\%(Filename)\\%(Filename).cmo</ContentOutput>
-    </MeshContentTask>
     <None Include="Shader\Header\Model.hlsli" />
     <None Include="Shader\Header\Primitive2D.hlsli" />
     <None Include="Shader\Header\Primitive3D.hlsli" />
