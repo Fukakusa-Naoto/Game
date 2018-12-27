@@ -29,7 +29,7 @@
 // 名前空間の定義 ================================================================
 namespace Library
 {
-	namespace Utility
+	namespace Shader
 	{
 		// 構造体の定義 ==========================================================
 		struct VertexShader
@@ -73,6 +73,8 @@ namespace Library
 			ID3D11Device1* m_device;
 			// 頂点シェーダー管理のマップ変数
 			std::map<const wchar_t*, VertexShader*> m_vertexShaderMap;
+			// ジオメトリシェーダー管理のマップ変数
+			std::map<const wchar_t*, ID3D11GeometryShader*> m_geometryShaderMap;
 			// ピクセルシェーダー管理のマップ変数
 			std::map<const wchar_t*, ID3D11PixelShader*> m_pixelShaderMap;
 
@@ -123,6 +125,17 @@ namespace Library
 			//! @return    ピクセルシェーダーのインスタンス
 			//--------------------------------------------------------------
 			ID3D11PixelShader* LoadPixelShader(const wchar_t* fileName);
+
+
+			//--------------------------------------------------------------
+			//! @summary   ジオメトリシェーダーを読み込みシェーダー・オブジェクト
+			//!			   を作成する
+			//!
+			//! @parameter [fileName] 読み込むファイル
+			//!
+			//! @return    ジオメトリシェーダーのインスタンス
+			//--------------------------------------------------------------
+			ID3D11GeometryShader* LoadGeometryShader(const wchar_t* fileName);
 		};
 	}
 }

@@ -45,9 +45,9 @@ Graphic3D::Model::Model::Model(const Graphic3D::Model::PMDModel* pmdModel, const
 	m_commonStates = Common::DeviceResources::GetInstance()->GetCommonStates();
 
 	// 頂点シェーダーのインスタンスの取得
-	m_vertexShader = Utility::ShaderManager::GetInstance()->LoadVertexShader(L"SkinningModelVertexShader", SKINNING_INPUT_LAYOUT);
+	m_vertexShader = Shader::ShaderManager::GetInstance()->LoadVertexShader(L"SkinningModelVertexShader", SKINNING_INPUT_LAYOUT);
 	// ピクセルシェーダーのインスタンスの取得
-	m_pixelShader = Utility::ShaderManager::GetInstance()->LoadPixelShader(L"SkinningModelPixelShader");
+	m_pixelShader = Shader::ShaderManager::GetInstance()->LoadPixelShader(L"SkinningModelPixelShader");
 }
 
 
@@ -71,9 +71,9 @@ Graphic3D::Model::Model::Model(const Graphic3D::Model::PMXModel* pmxModel, const
 	m_commonStates = Common::DeviceResources::GetInstance()->GetCommonStates();
 
 	// 頂点シェーダーのインスタンスの取得
-	m_vertexShader = Utility::ShaderManager::GetInstance()->LoadVertexShader(L"SkinningModelVertexShader", SKINNING_INPUT_LAYOUT);
+	m_vertexShader = Shader::ShaderManager::GetInstance()->LoadVertexShader(L"SkinningModelVertexShader", SKINNING_INPUT_LAYOUT);
 	// ピクセルシェーダーのインスタンスの取得
-	m_pixelShader = Utility::ShaderManager::GetInstance()->LoadPixelShader(L"SkinningModelPixelShader");
+	m_pixelShader = Shader::ShaderManager::GetInstance()->LoadPixelShader(L"SkinningModelPixelShader");
 }
 
 
@@ -342,11 +342,7 @@ void Graphic3D::Model::Model::CreateModel(const PMXModel* pmxModel, const wchar_
 				tmp = Utility::String::SliceString(fileName, L'/');
 
 				wstring fullPass = wstring(L"Resources/Models/PMX/") + tmp[0] + L"/" + material.textureName.c_str();
-
-				// ファイルがあるか調べる
-				std::ifstream ifs(fullPass);
-				if(ifs.is_open()) material.texture = Utility::TextureManager::GetInstance()->LoadTexture(fullPass.c_str());
-				else material.texture = nullptr;
+				material.texture = Utility::TextureManager::GetInstance()->LoadTexture(fullPass.c_str());
 			}
 			else material.texture = nullptr;
 

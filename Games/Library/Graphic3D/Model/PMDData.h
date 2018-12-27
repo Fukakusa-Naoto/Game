@@ -13,12 +13,9 @@
 
 
 // ヘッダファイルの読み込み =======================================================
-// <プリコンパイル済みヘッダファイル>
-#include "../../../pch.h"
-
 // <標準ヘッダファイル>
 #include <vector>
-
+#include <string>
 
 
 // 名前空間の定義 ================================================================
@@ -28,7 +25,7 @@ namespace Library
 	{
 		namespace Model
 		{
-			// 構造体の定義 ==========================================================
+			// 構造体の定義 ======================================================
 			struct PMDHeader
 			{
 				char magic[3];					// "Pmd"
@@ -65,18 +62,18 @@ namespace Library
 			};
 
 
-			enum BoneType : uint8_t
+			enum PMDBoneType : uint8_t
 			{
-				Rotation,			// 回転
-				RotationAndMove,	// 回転と移動
-				IkEffector,			// IK
-				Unknown,			// 不明
-				IkEffectable,		// IK影響下
-				RotationEffectable,	// 回転影響下
-				IkTarget,			// IK接続先
-				Invisible,			// 非表示
-				Twist,				// 捻り
-				RotationMovement	// 回転運動
+				PMD_ROTATION,				// 回転
+				PMD_ROTATION_AND_MOVE,		// 回転と移動
+				PMD_IK_EFFECTOR,			// IK
+				PMD_UNKNOWN,				// 不明
+				PMD_IK_EFFECTABLE,			// IK影響下
+				PMD_ROTATION_EFFECTABLE,	// 回転影響下
+				PMD_IK_TARGET,				// IK接続先
+				PMD_INVISIBLE,				// 非表示
+				PMD_TWIST,					// 捻り
+				PMD_ROTATION_MOVEMENT		// 回転運動
 			};
 
 
@@ -86,7 +83,7 @@ namespace Library
 				std::string nameEnglish;			// ボーン名(English)
 				uint16_t parentBoneIndex;			// 親ボーン番号　(ない場合は0xFFFF)
 				uint16_t tailPosBoneIndex;			// 末端ボーン番号
-				BoneType boneType;					// ボーン種類
+				PMDBoneType boneType;					// ボーン種類
 				uint16_t ikParentBoneIndex;			// IKボーン番号 (ない場合は0)
 				float boneHeadPos[3];				// ボーンのヘッドの位置
 			};
@@ -109,20 +106,20 @@ namespace Library
 			};
 
 
-			enum FaceCategory : uint8_t
+			enum PMDFaceCategory : uint8_t
 			{
-				Base,		// ベース
-				Eyebrow,	// 眉
-				Eye,		// 目
-				Mouth,		// 口
-				Other		// その他
+				PMD_BASE,		// ベース
+				PMD_EYEBROW,	// 眉
+				PMD_EYE,		// 目
+				PMD_MOUTH,		// 口
+				PMD_OTHER,		// その他
 			};
 
 
 			struct PMDFace
 			{
 				std::string name;						// 表情名
-				FaceCategory type;						// 表情の種類
+				PMDFaceCategory type;					// 表情の種類
 				std::vector<PMDFaceVertex> vertices;	// 表情用の頂点データ
 				std::string nameEnglish;				// 表情名(English)
 			};
@@ -144,20 +141,20 @@ namespace Library
 
 
 			// 衝突形状
-			enum RigidBodyShape : uint8_t
+			enum PMDRigidBodyShape : uint8_t
 			{
-				Sphere = 0,		// 球
-				Box = 1,		// 直方体
-				Cpusel = 2		// カプセル
+				PMD_SPHERE = 0,		// 球
+				PMD_BOX    = 1,		// 直方体
+				PMD_CPUSEL = 2		// カプセル
 			};
 
 
 			// 剛体タイプ
-			enum RigidBodyType : uint8_t
+			enum PMDRigidBodyType : uint8_t
 			{
-				BoneConnected = 0,			// ボーン追従
-				Physics = 1,				// 物理演算
-				ConnectedPhysics = 2		// 物理演算(Bone位置合せ)
+				PMD_BONE_CONNECTED    = 0,		// ボーン追従
+				PMD_PHYSICS           = 1,		// 物理演算
+				PMD_CONNECTED_PHYSICS = 2		// 物理演算(Bone位置合せ)
 			};
 
 
@@ -168,7 +165,7 @@ namespace Library
 				uint16_t relatedBoneIndex;		// 関連ボーン番号
 				uint8_t groupIndex;				// グループ番号
 				uint16_t mask;					// マスク
-				RigidBodyShape shape;			// 形状
+				PMDRigidBodyShape shape;		// 形状
 				float size[3];					// 大きさ
 				float position[3];				// 座標
 				float orientation[3];			// 回転
@@ -177,7 +174,7 @@ namespace Library
 				float anglarDamping;			// 回転ダンピング
 				float restitution;				// 反発係数
 				float friction;					// 摩擦係数
-				RigidBodyType rigidType;		// 演算方法
+				PMDRigidBodyType rigidType;		// 演算方法
 			};
 
 

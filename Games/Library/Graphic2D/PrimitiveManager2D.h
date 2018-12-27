@@ -18,7 +18,7 @@
 
 // <自作ヘッダファイル>
 #include "../System/SingletonBase.h"
-#include "../Utility/ShaderManager.h"
+#include "../Shader/ShaderManager.h"
 
 
 // 名前空間の定義 ================================================================
@@ -69,9 +69,12 @@ namespace Library
 			// コモンステート
 			DirectX::CommonStates* m_commonStates;
 			// 頂点シェーダーのインスタンス
-			Utility::VertexShader* m_vertexShader;
+			Shader::VertexShader* m_vertexShader;
 			// ピクセルシェーダーのインスタンス
 			ID3D11PixelShader* m_pixelShader;
+			// ビューポート
+			D3D11_VIEWPORT m_viewport;
+			D3D11_VIEWPORT m_defaultViewport;
 
 
 			// <コンストラクタ>
@@ -170,6 +173,13 @@ namespace Library
 			//--------------------------------------------------------------
 			void DrawCircle(int centerX, int centerY, int radius, DirectX::XMFLOAT4 color, bool fillFlag = true);
 
+
+			// <セッター関数>
+		public:
+			//--------------------------------------------------------------
+			//! @parameter [viewport] ビューポート
+			//--------------------------------------------------------------
+			inline void SetViewport(const D3D11_VIEWPORT& viewport) { m_viewport = viewport; }
 		};
 	}
 }

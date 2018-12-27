@@ -23,7 +23,42 @@ namespace Library
 {
 	namespace Math
 	{
+		// 構造体の定義 ==========================================================
+		struct Box3D
+		{
+			// 中心座標
+			DirectX::SimpleMath::Vector3 position;
+			// サイズ
+			DirectX::SimpleMath::Vector3 size;
+
+
+			// <コンストラクタ>
+			Box3D(const DirectX::SimpleMath::Vector3& position, const DirectX::SimpleMath::Vector3& size) :
+				position(position),
+				size(size)
+			{
+				// 何もしない
+			}
+		};
+
+
 		// 関数の定義 ============================================================
+		//------------------------------------------------------------------
+		//! @summary   valueを、min から maxの範囲内に収める
+		//!
+		//! @parameter [value] 制限をかける値
+		//! @parameter [min] 最小値
+		//! @parameter [max] 最大値
+		//!
+		//! @return    なし
+		//------------------------------------------------------------------
+		template<class T> inline void Clamp(T& value, T min, T max)
+		{
+			if (value <= min) value = min;
+			else if (value >= max) value = max;
+		}
+
+
 		//--------------------------------------------------------------
 		//! @summary   ピクセル座標を正規化する(ピクセル座標->ワールド座標)
 		//!
@@ -236,5 +271,29 @@ namespace Library
 				cosRoll * cosPitch * sinYaw - sinRoll * sinPitch * cosYaw);
 		}
 
+
+		//------------------------------------------------------------------
+		//! @summary   点とボックスの間の最短距離の平方を求める
+		//!
+		//! @parameter [pointPosition] 点の座標
+		//! @parameter [box] ボックスの情報
+		//!
+		//! @return    最短距離
+		//------------------------------------------------------------------
+		inline float CalculateShortestRangePointToBox(const DirectX::SimpleMath::Vector3& pointPosition, const Box3D& box)
+		{
+			float point[3] = { pointPosition.x, pointPosition.y, pointPosition.z };
+			float min[3] = { box.position.x - (box.size.x * 0.5f), box.position.y - (box.size.y * 0.5f), box.position.z - (box.size.z * 0.5f), };
+			float max[3] = { box.position.x + (box.size.x * 0.5f), box.position.y + (box.size.y * 0.5f), box.position.z + (box.size.z * 0.5f), };
+
+			float shortestRange = 0.0f;
+			for (int i = 0; i < 3; i++)
+			{
+				float v = point[i];
+				if (v < min[i]) shortestRange += (min[i] - v) * (min[i] - v);
+				if (v > max[i]) shortestRange += (v - max[i]) * (v - max[i]);
+			}
+			return shortestRange;
+		}
 	}
 }

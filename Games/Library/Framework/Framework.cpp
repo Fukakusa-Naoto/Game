@@ -17,7 +17,7 @@
 
 // <自作ヘッダファイル>
 #include "Framework.h"
-#include "../Utility/ShaderManager.h"
+#include "../Shader/ShaderManager.h"
 #include "../Graphic2D/PrimitiveManager2D.h"
 #include "../Input/KeyboardUtil.h"
 #include "../Input/MouseUtil.h"
@@ -26,17 +26,20 @@
 #include "../Graphic3D/PrimitiveManager3D.h"
 #include "../Sound/SoundManager.h"
 #include "../Graphic3D/Model/ModelManager.h"
-
-
-// 共有する変数・関数の宣言 =================================================
-extern void ExitGame();
-
+#include "../Animation/MotionManager.h"
+#include "../Collision/CollisionManager.h"
+#include "../Physics/PhysicsManager.h"
 
 
 // usingディレクティブ =====================================================
 using namespace std;
 using namespace DirectX;
 using namespace Library;
+
+
+// 静的メンバ変数の定義 =====================================================
+bool Framework::Framework::m_isExit = false;
+
 
 
 // 関数の定義 ==============================================================
@@ -80,7 +83,7 @@ Framework::Framework::Framework(HINSTANCE hInstance, int nCmdShow, int screenWid
 
 	AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, FALSE);
 
-	m_hwnd = CreateWindowEx(0, wcex.lpszClassName, L"Game", WS_OVERLAPPEDWINDOW,
+	m_hwnd = CreateWindowEx(0, wcex.lpszClassName, L"Game", WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX,
 		CW_USEDEFAULT, CW_USEDEFAULT, rc.right - rc.left, rc.bottom - rc.top, nullptr, nullptr, hInstance,
 		nullptr);
 
@@ -107,6 +110,14 @@ Framework::Framework::Framework(HINSTANCE hInstance, int nCmdShow, int screenWid
 	CreateWindowSizeDependentResources();
 
 	Input::MouseUtil::GetInstance()->SetWindow(m_hwnd);
+
+#if defined(_DEBUG)
+	// ウィンドウモードで実行
+	m_deviceResources->GetSwapChain()->SetFullscreenState(false, NULL);
+#else
+	// フルスクリーンモードで実行
+	m_deviceResources->GetSwapChain()->SetFullscreenState(true, NULL);
+#endif
 }
 
 
@@ -134,17 +145,36 @@ void Framework::Framework::Tick()
 {
 	m_timer.Tick([&]()
 	{
+		// キーボード入力マネージャーの更新処理
 		Input::KeyboardUtil::GetInstance()->Update();
+
+		// マウス入力マネージャーの更新処理
 		Input::MouseUtil::GetInstance()->Update();
+
+		// サウンドマネージャーの更新処理
 		Sound::SoundManager::GetInstance()->Update();
+
+		// 衝突判定マネージャーの更新処理
+		Collision::CollisionManager::GetInstance()->Update();
+
+		// 物理マネージャーの更新処理
+		Physics::PhysicsManager::GetInstance()->Update(m_timer);
 
 		Update(m_timer);
 	});
 
+	// <FPSの表示>
+#if defined(_DEBUG)
+	unsigned int fps = m_timer.GetFramesPerSecond();
+	std::wstring str = L"FPS:" + std::to_wstring(fps);
+	SetWindowText(m_hwnd, str.c_str());
+#endif
 
 	PreRender();
 	Render();
 	PostRender();
+
+	if(m_isExit) PostQuitMessage(0);
 }
 #pragma endregion
 
@@ -325,7 +355,7 @@ void Framework::Framework::CreateDeviceDependentResources()
 	ID3D11DeviceContext1* context = m_deviceResources->GetD3DDeviceContext();
 
 	// シェーダーマネージャーの初期化処理
-	Utility::ShaderManager::GetInstance()->Initialize();
+	Shader::ShaderManager::GetInstance()->Initialize();
 
 	// 2Dのプリミティブ描画のマネージャークラスの初期化処理
 	Graphic2D::PrimitiveManager2D::GetInstance()->Initialize();
@@ -341,6 +371,12 @@ void Framework::Framework::CreateDeviceDependentResources()
 
 	// モデルマネージャーの初期化処理
 	Graphic3D::Model::ModelManager::GetInstance();
+
+	// 衝突判定マネージャーの初期化処理
+	Collision::CollisionManager::GetInstance()->Initialize();
+
+	// 物理マネージャーの初期化処理
+	Physics::PhysicsManager::GetInstance()->Intialize();
 }
 
 
@@ -370,7 +406,7 @@ void Framework::Framework::CreateWindowSizeDependentResources()
 void Framework::Framework::OnDeviceLost()
 {
 	// シェーダーマネージャーの終了処理
-	Utility::ShaderManager::Reset();
+	Shader::ShaderManager::Reset();
 
 	// 2Dのプリミティブ描画のマネージャークラスの終了処理
 	Graphic2D::PrimitiveManager2D::Reset();
@@ -395,6 +431,15 @@ void Framework::Framework::OnDeviceLost()
 
 	// モデルマネージャーの終了処理
 	Graphic3D::Model::ModelManager::Reset();
+
+	// モーションマネージャーの終了処理
+	Animation::MotionManager::Reset();
+
+	// 衝突判定マネージャーの終了処理
+	Collision::CollisionManager::Reset();
+
+	// 物理マネージャーの終了処理
+	Physics::PhysicsManager::Reset();
 }
 
 
@@ -434,8 +479,6 @@ LRESULT CALLBACK Framework::Framework::WndProc(HWND hWnd, UINT message, WPARAM w
 	static bool s_in_sizemove = false;
 	static bool s_in_suspend = false;
 	static bool s_minimized = false;
-	// フルスクリーンにデフォルト設定する場合は、s_fullscreenをtrueに設定します。
-	static bool s_fullscreen = false;
 
 	auto framework = reinterpret_cast<Framework*>(GetWindowLongPtr(hWnd, GWLP_USERDATA));
 
@@ -461,10 +504,6 @@ LRESULT CALLBACK Framework::Framework::WndProc(HWND hWnd, UINT message, WPARAM w
 			s_minimized = false;
 			if ((s_in_suspend) && (framework)) framework->OnResuming();
 			s_in_suspend = false;
-		}
-		else if ((!s_in_sizemove) && (framework))
-		{
-			framework->OnWindowSizeChanged(LOWORD(lParam), HIWORD(lParam));
 		}
 		break;
 
@@ -523,40 +562,6 @@ LRESULT CALLBACK Framework::Framework::WndProc(HWND hWnd, UINT message, WPARAM w
 		framework->OnDeviceLost();
 		PostQuitMessage(0);
 		break;
-
-	case WM_SYSKEYDOWN:
-		Keyboard::ProcessMessage(message, wParam, lParam);
-		if ((wParam == VK_RETURN) && ((lParam & 0x60000000) == 0x20000000))
-		{
-			// Implements the classic ALT+ENTER fullscreen toggle
-			// 翻訳：従来のALT + ENTERフルスクリーントグルを実装します
-			if (s_fullscreen)
-			{
-				SetWindowLongPtr(hWnd, GWL_STYLE, WS_OVERLAPPEDWINDOW);
-				SetWindowLongPtr(hWnd, GWL_EXSTYLE, 0);
-
-				int width = 800;
-				int height = 600;
-				if (framework) framework->GetDefaultSize(width, height);
-
-				ShowWindow(hWnd, SW_SHOWNORMAL);
-
-				SetWindowPos(hWnd, HWND_TOP, 0, 0, width, height, SWP_NOMOVE | SWP_NOZORDER | SWP_FRAMECHANGED);
-			}
-			else
-			{
-				SetWindowLongPtr(hWnd, GWL_STYLE, 0);
-				SetWindowLongPtr(hWnd, GWL_EXSTYLE, WS_EX_TOPMOST);
-
-				SetWindowPos(hWnd, HWND_TOP, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER | SWP_FRAMECHANGED);
-
-				ShowWindow(hWnd, SW_SHOWMAXIMIZED);
-			}
-
-			s_fullscreen = !s_fullscreen;
-		}
-		break;
-
 	case WM_MENUCHAR:
 		// A menu is active and the user presses a key that does not correspond
 		// to any mnemonic or accelerator key. Ignore so we don't produce an error beep.
@@ -564,6 +569,7 @@ LRESULT CALLBACK Framework::Framework::WndProc(HWND hWnd, UINT message, WPARAM w
 		//		 無視してエラービープ音を鳴らしません。
 
 		return MAKELRESULT(0, MNC_CLOSE);
+	case WM_SYSKEYDOWN:
 	case WM_INPUT:
 	case WM_MOUSEMOVE:
 	case WM_LBUTTONDOWN:
@@ -586,4 +592,18 @@ LRESULT CALLBACK Framework::Framework::WndProc(HWND hWnd, UINT message, WPARAM w
 	}
 
 	return DefWindowProc(hWnd, message, wParam, lParam);
+}
+
+
+
+//--------------------------------------------------------------------
+//! @summary   ゲームの終了処理
+//!
+//! @parameter [void] なし
+//!
+//! @return    なし
+//--------------------------------------------------------------------
+void Framework::Framework::ExitGame()
+{
+	m_isExit = true;
 }

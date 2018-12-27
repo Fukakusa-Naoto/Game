@@ -32,30 +32,26 @@ namespace Library
 		protected:
 			// 視点
 			Math::Transform m_eyeTransform;
-
 			// 注視点
 			Math::Transform m_targetTransform;
-
 			// ビュー行列
 			DirectX::SimpleMath::Matrix m_view;
-
 			// 上方向ベクトル
 			DirectX::SimpleMath::Vector3 m_upVector;
-
 			// 射影行列
 			DirectX::SimpleMath::Matrix m_projection;
-
 			// 視野角
 			float m_viewingAngle;
-
 			// アスペクト比
 			float m_aspect;
-
 			// ニアクリップ
 			float m_nearClip;
-
 			// ファークリップ
 			float m_farClip;
+			// デバイス・コンテキスト・インターフェイス
+			ID3D11DeviceContext1* m_deviceContext;
+			// ビューポート
+			D3D11_VIEWPORT m_viewport;
 
 
 			// <コンストラクタ>
@@ -88,6 +84,26 @@ namespace Library
 			void LookAt(const DirectX::SimpleMath::Vector3& target);
 
 
+			//--------------------------------------------------------------
+			//! @summary   カメラに設定されたビューポートでの描画を開始(End関数が呼び出されるまで)
+			//!
+			//! @parameter [void] なし
+			//!
+			//! @return    なし
+			//--------------------------------------------------------------
+			void Begin();
+
+
+			//--------------------------------------------------------------
+			//! @summary   カメラに設定されたビューポートでの描画を終了
+			//!
+			//! @parameter [void] なし
+			//!
+			//! @return    なし
+			//--------------------------------------------------------------
+			void End();
+
+
 			// <セッター関数>
 		public:
 			//--------------------------------------------------------------
@@ -117,6 +133,50 @@ namespace Library
 			//--------------------------------------------------------------
 			virtual inline void SetRotation(const DirectX::SimpleMath::Quaternion& rotation) { m_eyeTransform.SetRotation(rotation); }
 
+
+			//--------------------------------------------------------------
+			//! @parameter [aspect] アスペクト比
+			//--------------------------------------------------------------
+			inline void SetAspect(float aspect) { m_aspect = aspect; }
+
+
+			//----------------------------------------------------------
+			//! @parameter [viewport] ビューポートの設定
+			//----------------------------------------------------------
+			inline void SetViewport(const D3D11_VIEWPORT& viewport) { m_viewport = viewport; }
+
+
+			//----------------------------------------------------------
+			//! @parameter [topLeftX] 左上のX座標
+			//! @parameter [topLeftY] 左上のY座標
+			//----------------------------------------------------------
+			inline void SetViewportPosition(float topLeftX, float topLeftY)
+			{
+				m_viewport.TopLeftX = topLeftX;
+				m_viewport.TopLeftY = topLeftY;
+			}
+
+
+			//----------------------------------------------------------
+			//! @parameter [width] 幅
+			//! @parameter [height] 高さ
+			//----------------------------------------------------------
+			inline void SetViewportSize(float width, float height)
+			{
+				m_viewport.Width = width;
+				m_viewport.Height = height;
+			}
+
+
+			//----------------------------------------------------------
+			//! @parameter [min] 最小深度
+			//! @parameter [max] 最大深度
+			//----------------------------------------------------------
+			inline void SetViewportDepth(float min, float max)
+			{
+				m_viewport.MinDepth = min;
+				m_viewport.MaxDepth = max;
+			}
 
 
 			// <ゲッター関数>
@@ -160,26 +220,31 @@ namespace Library
 			//--------------------------------------------------------------
 			//! @summary   ビルボード行列の取得
 			//--------------------------------------------------------------
-			inline const DirectX::SimpleMath::Matrix& GetBillboard(const DirectX::SimpleMath::Vector3 position) const { return DirectX::SimpleMath::Matrix::CreateBillboard(position, m_eyeTransform.GetPosition(), DirectX::SimpleMath::Vector3::Up); }
+			inline DirectX::SimpleMath::Matrix GetBillboard(const DirectX::SimpleMath::Vector3& position) const { return DirectX::SimpleMath::Matrix::CreateBillboard(position, m_eyeTransform.GetPosition(), DirectX::SimpleMath::Vector3::Up); }
 
 
 			//--------------------------------------------------------------
 			//! @summary   X軸ビルボード行列の取得
 			//--------------------------------------------------------------
-			inline const DirectX::SimpleMath::Matrix& GetBillboardConstrainX(const DirectX::SimpleMath::Vector3 position) const { return DirectX::SimpleMath::Matrix::CreateConstrainedBillboard(position, m_eyeTransform.GetPosition(), DirectX::SimpleMath::Vector3::UnitX); }
+			inline DirectX::SimpleMath::Matrix GetBillboardConstrainX(const DirectX::SimpleMath::Vector3& position) const { return DirectX::SimpleMath::Matrix::CreateConstrainedBillboard(position, m_eyeTransform.GetPosition(), DirectX::SimpleMath::Vector3::UnitX); }
 
 
 			//--------------------------------------------------------------
 			//! @summary   Y軸ビルボード行列の取得
 			//--------------------------------------------------------------
-			inline const DirectX::SimpleMath::Matrix& GetBillboardConstrainY(const DirectX::SimpleMath::Vector3 position) const { return DirectX::SimpleMath::Matrix::CreateConstrainedBillboard(position, m_eyeTransform.GetPosition(), DirectX::SimpleMath::Vector3::UnitY); }
+			inline DirectX::SimpleMath::Matrix GetBillboardConstrainY(const DirectX::SimpleMath::Vector3& position) const { return DirectX::SimpleMath::Matrix::CreateConstrainedBillboard(position, m_eyeTransform.GetPosition(), DirectX::SimpleMath::Vector3::UnitY); }
 
 
 			//--------------------------------------------------------------
 			//! @summary   Z軸ビルボード行列の取得
 			//--------------------------------------------------------------
-			inline const DirectX::SimpleMath::Matrix& GetBillboardConstrainZ(const DirectX::SimpleMath::Vector3 position) const { return DirectX::SimpleMath::Matrix::CreateConstrainedBillboard(position, m_eyeTransform.GetPosition(), DirectX::SimpleMath::Vector3::UnitZ); }
+			inline DirectX::SimpleMath::Matrix GetBillboardConstrainZ(const DirectX::SimpleMath::Vector3& position) const { return DirectX::SimpleMath::Matrix::CreateConstrainedBillboard(position, m_eyeTransform.GetPosition(), DirectX::SimpleMath::Vector3::UnitZ); }
 
+
+			//--------------------------------------------------------------
+			//! @summary   ビューポートの取得
+			//--------------------------------------------------------------
+			inline const D3D11_VIEWPORT& GetViewport() const { return m_viewport; }
 		};
 	}
 }

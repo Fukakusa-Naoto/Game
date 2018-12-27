@@ -18,7 +18,7 @@
 
 // <自作ヘッダファイル>
 #include "../System/SingletonBase.h"
-#include "../Utility/ShaderManager.h"
+#include "../Shader/ShaderManager.h"
 
 
 // 名前空間の定義 ================================================================
@@ -45,13 +45,13 @@ namespace Library
 
 				// <コンストラクタ>
 				VertexBuffer() :
-				position(DirectX::SimpleMath::Vector3::Zero),
-				color(DirectX::Colors::White)
+					position(DirectX::SimpleMath::Vector3::Zero),
+					color(DirectX::XMFLOAT4(1.0f,1.0f,1.0f,1.0f))
 				{
 					// 何もしない
 				}
 
-				VertexBuffer(DirectX::SimpleMath::Vector3 position, DirectX::XMFLOAT4 color) :
+				VertexBuffer(DirectX::SimpleMath::Vector3 position, const DirectX::XMFLOAT4& color) :
 					position(position),
 					color(color)
 				{
@@ -97,11 +97,31 @@ namespace Library
 			// コモンステート
 			DirectX::CommonStates* m_commonStates;
 			// 頂点シェーダーのインスタンス
-			Utility::VertexShader* m_vertexShader;
+			Shader::VertexShader* m_vertexShader;
+			Shader::VertexShader* m_vertexShader2;
+			// ジオメトリシェーダーのインスタンス
+			ID3D11GeometryShader* m_geometryShader;
 			// ピクセルシェーダーのインスタンス
 			ID3D11PixelShader* m_pixelShader;
 			// 定数バッファ・オブジェクト
 			ID3D11Buffer* m_constBuffer;
+
+
+			// 点・線・三角形・クワッドの頂点バッファ・オブジェクト
+			ID3D11Buffer* m_vertexBuffer;
+			ID3D11Buffer* m_indexBuffer;
+
+			// 立方体のバッファ・オブジェクト
+			std::vector<VertexBuffer> m_cubeVertexData;
+			ID3D11Buffer* m_cubeVertexBuffer;
+			ID3D11Buffer* m_cubeIndexBuffer;
+			ID3D11Buffer* m_cubeWireframeIndexBuffer;
+
+			// 球のバッファ・オブジェクト
+			std::vector<VertexBuffer> m_sphereVertexData;
+			ID3D11Buffer* m_sphereVertexBuffer;
+			ID3D11Buffer* m_sphereIndexBuffer;
+
 
 
 			// <コンストラクタ>
@@ -173,9 +193,24 @@ namespace Library
 
 
 			//--------------------------------------------------------------
-			//! @summary   立方体の描画
+			//! @summary   クワッドの描画
 			//!
 			//! @parameter [world] ワールド行列
+			//! @parameter [color] 色
+			//! @parameter [view] ビュー行列
+			//! @parameter [projection] 射影行列
+			//! @parameter [wireframeFlag] ワイヤーフレーム表示フラグ
+			//!
+			//! @return    なし
+			//--------------------------------------------------------------
+			void DrawQuad(const DirectX::SimpleMath::Matrix& world, DirectX::XMFLOAT4 color, const DirectX::SimpleMath::Matrix& view, const DirectX::SimpleMath::Matrix& projection, bool wireframeFlag = false);
+
+
+			//--------------------------------------------------------------
+			//! @summary   立方体の描画
+			//!
+			//! @parameter [position] 座標
+			//! @parameter [rotation] 回転角
 			//! @parameter [size] サイズ(x:幅, y:高さ, z:奥行)
 			//! @parameter [color] 色
 			//! @parameter [view] ビュー行列
@@ -184,7 +219,24 @@ namespace Library
 			//!
 			//! @return    なし
 			//--------------------------------------------------------------
-			void DrawCube(const DirectX::SimpleMath::Matrix& world, const DirectX::SimpleMath::Vector3& size, DirectX::XMFLOAT4 color, const DirectX::SimpleMath::Matrix& view, const DirectX::SimpleMath::Matrix& projection, bool wireframeFlag = false);
+			void DrawCube(const DirectX::SimpleMath::Vector3& position, const DirectX::SimpleMath::Vector3& rotation, const DirectX::SimpleMath::Vector3& size, DirectX::XMFLOAT4 color, const DirectX::SimpleMath::Matrix& view, const DirectX::SimpleMath::Matrix& projection, bool wireframeFlag = false);
+			void DrawCube(const DirectX::SimpleMath::Vector3& position, const DirectX::SimpleMath::Quaternion& rotation, const DirectX::SimpleMath::Vector3& size, DirectX::XMFLOAT4 color, const DirectX::SimpleMath::Matrix& view, const DirectX::SimpleMath::Matrix& projection, bool wireframeFlag = false);
+
+
+			//--------------------------------------------------------------
+			//! @summary   立方体の描画
+			//!
+			//! @parameter [position] 座標
+			//! @parameter [rotation] 回転角
+			//! @parameter [size] サイズ(x:幅, y:高さ, z:奥行)
+			//! @parameter [color] 色
+			//! @parameter [view] ビュー行列
+			//! @parameter [projection] 射影行列
+			//! @parameter [lambda] レンダリング・パイプライン構築のラムダ式関数
+			//!
+			//! @return    なし
+			//--------------------------------------------------------------
+			void DrawCube(const DirectX::SimpleMath::Vector3& position, const DirectX::SimpleMath::Quaternion& rotation, const DirectX::SimpleMath::Vector3& size, DirectX::XMFLOAT4 color, const DirectX::SimpleMath::Matrix& view, const DirectX::SimpleMath::Matrix& projection, std::function<void()> lambda);
 
 
 			//--------------------------------------------------------------
@@ -200,7 +252,6 @@ namespace Library
 			//! @return    なし
 			//--------------------------------------------------------------
 			void DrawSphere(const DirectX::SimpleMath::Vector3& position, float radius, const DirectX::XMFLOAT4& color, const DirectX::SimpleMath::Matrix& view, const DirectX::SimpleMath::Matrix& projection, bool wireframeFlag = false);
-
 		};
 	}
 }

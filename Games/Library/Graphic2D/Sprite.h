@@ -18,7 +18,7 @@
 #include "../../pch.h"
 
 // <自作ヘッダファイル>
-#include "../Utility/ShaderManager.h"
+#include "../Shader/ShaderManager.h"
 #include "../Utility/TextureManager.h"
 
 
@@ -66,11 +66,15 @@ namespace Library
 			// デバイス・コンテキスト・インターフェイス
 			ID3D11DeviceContext1* m_deviceContext;
 			// 頂点シェーダー・インターフェイス
-			Utility::VertexShader* m_vertexShader;
+			Shader::VertexShader* m_vertexShader;
 			// ピクセルシェーダー・インターフェイス
 			ID3D11PixelShader* m_pixelShader;
 			// コモンステート
 			DirectX::CommonStates* m_commonStates;
+			// 頂点バッファ
+			ID3D11Buffer* m_vertexBuffer;
+			// インデックスバッファ
+			ID3D11Buffer* m_indexBuffer;
 
 			// テクスチャ
 			Utility::Texture* m_texture;
@@ -86,14 +90,17 @@ namespace Library
 			DirectX::SimpleMath::Vector2 m_anchorPoint;
 			// スケール
 			DirectX::SimpleMath::Vector2 m_scale;
+			// ビューポート
+			D3D11_VIEWPORT m_viewport;
+			D3D11_VIEWPORT m_defaultViewport;
 
 
 			// <コンストラクタ>
-		private:
+		public:
 			//--------------------------------------------------------------
-			//! @parameter [void] 読なし
+			//! @parameter [void] なし
 			//--------------------------------------------------------------
-			Sprite() {};
+			Sprite();
 
 		public:
 			//--------------------------------------------------------------
@@ -117,6 +124,116 @@ namespace Library
 			//! @return    なし
 			//--------------------------------------------------------------
 			void Draw();
+
+
+			//--------------------------------------------------------------
+			//! @summary   描画処理
+			//!
+			//! @parameter [lambda] レンダリング・パイプライン構築のラムダ式関数
+			//!
+			//! @return    なし
+			//--------------------------------------------------------------
+			void Draw(std::function<void()> lambda) const;
+
+
+			// <セッター関数>
+		public:
+			//--------------------------------------------------------------
+			//! @parameter [texture] テクスチャ
+			//--------------------------------------------------------------
+			inline void SetTexture(Utility::Texture* texture) { m_texture = texture; }
+
+
+			//--------------------------------------------------------------
+			//! @parameter [position] 座標
+			//--------------------------------------------------------------
+			inline void SetPosition(const DirectX::SimpleMath::Vector2& position) { m_position = position; }
+
+
+			//--------------------------------------------------------------
+			//! @parameter [rect] 切り抜き座標
+			//--------------------------------------------------------------
+			inline void SetRect(const RECT& rect) { m_rect = rect; }
+
+
+			//--------------------------------------------------------------
+			//! @parameter [color] 色
+			//--------------------------------------------------------------
+			inline void SetColor(const DirectX::SimpleMath::Color& color) { m_color = color; }
+
+
+			//--------------------------------------------------------------
+			//! @parameter [rotation] 回転角
+			//--------------------------------------------------------------
+			inline void SetRotation(float rotation) { m_rotation = rotation; }
+
+
+			//--------------------------------------------------------------
+			//! @parameter [anchorPoint] アンカーポイント
+			//--------------------------------------------------------------
+			inline void SetAnchorPoint(const DirectX::SimpleMath::Vector2& anchorPoint) { m_anchorPoint = anchorPoint; }
+
+
+			//--------------------------------------------------------------
+			//! @parameter [scale] スケール
+			//--------------------------------------------------------------
+			inline void SetScale(const DirectX::SimpleMath::Vector2& scale) { m_scale = scale; }
+
+
+			//--------------------------------------------------------------
+			//! @parameter [viewport] ビューポートの設定
+			//--------------------------------------------------------------
+			inline void SetViewport(const D3D11_VIEWPORT& viewport) { m_viewport = viewport; }
+
+
+			// <ゲッター関数>
+		public:
+			//--------------------------------------------------------------
+			//! @return    テクスチャ
+			//--------------------------------------------------------------
+			inline Utility::Texture* GetTexture() const { return m_texture; }
+
+
+			//--------------------------------------------------------------
+			//! @return    座標
+			//--------------------------------------------------------------
+			inline const DirectX::SimpleMath::Vector2& GetPosition() const { return m_position; }
+
+
+			//--------------------------------------------------------------
+			//! @return    切り抜き座標
+			//--------------------------------------------------------------
+			inline const RECT& GetRect() const { return m_rect; }
+
+
+			//--------------------------------------------------------------
+			//! @return    色
+			//--------------------------------------------------------------
+			inline const DirectX::SimpleMath::Color& GetColor() const { return m_color; }
+
+
+			//--------------------------------------------------------------
+			//! @return    回転角
+			//--------------------------------------------------------------
+			inline float GetRotation() const { return m_rotation; }
+
+
+			//--------------------------------------------------------------
+			//! @return    アンカーポイント
+			//--------------------------------------------------------------
+			inline const DirectX::SimpleMath::Vector2& GetAnchorPoint() { return m_anchorPoint; }
+
+
+			//--------------------------------------------------------------
+			//! @return    スケール
+			//--------------------------------------------------------------
+			inline const DirectX::SimpleMath::Vector2& GetScale() const { return m_scale; }
+
+
+			//--------------------------------------------------------------
+			//! @return    ビューポートの設定
+			//--------------------------------------------------------------
+			inline const D3D11_VIEWPORT& GetViewport() const { return m_viewport; }
 		};
 	}
 }

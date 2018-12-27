@@ -12,8 +12,8 @@ struct VS_INPUT
 {
     // 座標
     float3 position : POSITION;
-    // 色
-    float4 color : COLOR;
+	// 色
+	float4 color : COLOR;
 };
 
 
@@ -22,6 +22,8 @@ struct PS_INPUT
 {
     // 座標
     float4 position : SV_POSITION;
-    // 色
-    float4 color : COLOR;
+	// 色
+	float4 color : COLOR;
+	// 法線ベクトル
+	float3 normal : NORMAL;
 };

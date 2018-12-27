@@ -45,6 +45,7 @@ namespace Library
 		private:
 			std::list<SceneBase*> m_activeScene;
 			std::map<std::string, SceneBase*> m_sceneList;
+			SceneBase* m_nextScene;
 
 
 			// <コンストラクタ>
@@ -147,6 +148,16 @@ namespace Library
 			//! @return    nullptr :リスト内にシーンがなかった
 			//--------------------------------------------------------------
 			SceneBase* CheckScene(const std::list<SceneBase*>& sceneList, const SceneBase& scene);
+
+
+			//--------------------------------------------------------------
+			//! @summary   シーンの変更
+			//!
+			//! @parameter [void] なし
+			//!
+			//! @return    なし
+			//--------------------------------------------------------------
+			void ChangeScene();
 
 
 			// <ゲッター関数>

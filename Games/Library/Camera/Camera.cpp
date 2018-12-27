@@ -42,6 +42,9 @@ Camera::Camera::Camera() :
 	m_nearClip(0.01f),
 	m_farClip(100.0f)
 {
+	// デバイス・コンテキスト・インターフェイスの取得
+	m_deviceContext = Common::DeviceResources::GetInstance()->GetD3DDeviceContext();
+
 	// 画面サイズの作成
 	RECT screenRect = Common::DeviceResources::GetInstance()->GetOutputSize();
 	int screenWidth = screenRect.right - screenRect.left;
@@ -49,6 +52,15 @@ Camera::Camera::Camera() :
 
 	// アスペクト比の算出
 	m_aspect = static_cast<float>(screenWidth) / static_cast<float>(screenHeight);
+
+
+	// ビューポートの初期設定
+	m_viewport.TopLeftX = 0.0f;
+	m_viewport.TopLeftY = 0.0f;
+	m_viewport.Width = static_cast<float>(screenWidth);
+	m_viewport.Height = static_cast<float>(screenHeight);
+	m_viewport.MinDepth = 0.0f;
+	m_viewport.MaxDepth = 1.0f;
 
 	m_targetTransform.SetPosition(Vector3(0.0f, 0.0f, -10.0f));
 	m_eyeTransform.SetChild(&m_targetTransform);
@@ -112,3 +124,35 @@ void Camera::Camera::LookAt(const Vector3& target)
 	// 回転行列からクォータニオンの作成
 	m_eyeTransform.SetRotation(Math::CreateQuaternion(m));
 }
+
+
+
+//--------------------------------------------------------------------
+//! @summary   カメラに設定されたビューポートでの描画を開始(End関数が呼び出されるまで)
+//!
+//! @parameter [void] なし
+//!
+//! @return    なし
+//--------------------------------------------------------------------
+void Camera::Camera::Begin()
+{
+	// ビューポートの設定
+	m_deviceContext->RSSetViewports(1, &m_viewport);
+}
+
+
+
+//--------------------------------------------------------------------
+//! @summary   カメラに設定されたビューポートでの描画を終了
+//!
+//! @parameter [void] なし
+//!
+//! @return    なし
+//--------------------------------------------------------------------
+void Camera::Camera::End()
+{
+	// ビューポートの設定を戻す
+	D3D11_VIEWPORT viewport = Common::DeviceResources::GetInstance()->GetScreenViewport();
+	m_deviceContext->RSSetViewports(1, &viewport);
+}
+

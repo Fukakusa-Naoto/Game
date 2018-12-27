@@ -41,6 +41,11 @@ namespace Library
 			int m_screenHeight;
 
 
+		private:
+			// ゲーム終了フラグ
+			static bool m_isExit;
+
+
 			// <コンストラクタ>
 		public:
 			//--------------------------------------------------------------
@@ -255,6 +260,15 @@ namespace Library
 			//--------------------------------------------------------------
 			static LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
+
+			//--------------------------------------------------------------
+			//! @summary   ゲームの終了処理
+			//!
+			//! @parameter [void] なし
+			//!
+			//! @return    なし
+			//--------------------------------------------------------------
+			static void ExitGame();
 		};
 	}
 }

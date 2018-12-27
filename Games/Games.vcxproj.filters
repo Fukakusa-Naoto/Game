@@ -68,6 +68,39 @@
     <Filter Include="Resources\FBX">
       <UniqueIdentifier>{e559f46a-780a-4e99-a5f9-e5842cd98256}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Library\Animation">
+      <UniqueIdentifier>{21b64de6-4dd9-4fd5-be7b-b05db50a7a04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\Collision">
+      <UniqueIdentifier>{952d0700-d94b-460c-a145-aa99c39b0dca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\Collision\Shape">
+      <UniqueIdentifier>{8e4c3892-a00b-45ce-94c5-f4cc32474980}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\Graphic2D\UI">
+      <UniqueIdentifier>{4fcf86c9-fb9e-474c-87bb-0311c5c77b2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\Physics">
+      <UniqueIdentifier>{051c5777-b1a2-4830-a69a-81ef99ea1d75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\Shader">
+      <UniqueIdentifier>{8abeae07-c799-42eb-a008-66e90d3ad2ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\Shader\Header">
+      <UniqueIdentifier>{b7912880-f22a-4dc0-8de7-39d1c0b8e306}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\Shader\VertexShader">
+      <UniqueIdentifier>{60ad2b0b-f66f-44dc-9321-d8d03ab6dde9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\Shader\GeometryShader">
+      <UniqueIdentifier>{72c2691a-bfe1-4ee0-8f5f-7375e06bf6b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\Shader\PixelShader">
+      <UniqueIdentifier>{81b86076-ef49-4e3e-8208-05b92f5e9ad4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shader\GeometryShader">
+      <UniqueIdentifier>{9dff3075-084b-469c-bd01-df13467c9168}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -87,9 +120,6 @@
       <Filter>Library\Framework</Filter>
     </ClInclude>
     <ClInclude Include="Library\Utility\BinaryFileLoader.h">
-      <Filter>Library\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="Library\Utility\ShaderManager.h">
       <Filter>Library\Utility</Filter>
     </ClInclude>
     <ClInclude Include="Library\Graphic2D\PrimitiveManager2D.h">
@@ -158,6 +188,51 @@
     <ClInclude Include="Library\Graphic3D\Model\PMXData.h">
       <Filter>Library\Graphic3D\Model</Filter>
     </ClInclude>
+    <ClInclude Include="Library\Animation\MotionManager.h">
+      <Filter>Library\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\Animation\VMDData.h">
+      <Filter>Library\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\Collision\Collision.h">
+      <Filter>Library\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\Collision\CollisionInterface.h">
+      <Filter>Library\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\Collision\CollisionManager.h">
+      <Filter>Library\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\Collision\SphereShape.h">
+      <Filter>Library\Collision\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\Collision\CollisionShape.h">
+      <Filter>Library\Collision\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\Collision\CubeShape.h">
+      <Filter>Library\Collision\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\Graphic2D\UI\Canvas.h">
+      <Filter>Library\Graphic2D\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\Graphic2D\UI\SpriteUI.h">
+      <Filter>Library\Graphic2D\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\Physics\PhysicsManager.h">
+      <Filter>Library\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\Physics\RigidBody.h">
+      <Filter>Library\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\System\ControllerBase.h">
+      <Filter>Library\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\System\GameObject.h">
+      <Filter>Library\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\Shader\ShaderManager.h">
+      <Filter>Library\Shader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
@@ -172,9 +247,6 @@
       <Filter>Library\Framework</Filter>
     </ClCompile>
     <ClCompile Include="Library\Utility\BinaryFileLoader.cpp">
-      <Filter>Library\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="Library\Utility\ShaderManager.cpp">
       <Filter>Library\Utility</Filter>
     </ClCompile>
     <ClCompile Include="Library\Graphic2D\PrimitiveManager2D.cpp">
@@ -234,6 +306,42 @@
     <ClCompile Include="Library\Graphic3D\Model\PMXData.cpp">
       <Filter>Library\Graphic3D\Model</Filter>
     </ClCompile>
+    <ClCompile Include="Library\Animation\MotionManager.cpp">
+      <Filter>Library\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Library\Collision\Collision.cpp">
+      <Filter>Library\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Library\Collision\CollisionInterface.cpp">
+      <Filter>Library\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Library\Collision\CollisionManager.cpp">
+      <Filter>Library\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Library\Collision\CubeShape.cpp">
+      <Filter>Library\Collision\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="Library\Collision\SphereShape.cpp">
+      <Filter>Library\Collision\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="Library\Collision\CollisionShape.cpp">
+      <Filter>Library\Collision\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="Library\Graphic2D\UI\Canvas.cpp">
+      <Filter>Library\Graphic2D\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Library\Physics\PhysicsManager.cpp">
+      <Filter>Library\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Library\Physics\RigidBody.cpp">
+      <Filter>Library\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Library\System\GameObject.cpp">
+      <Filter>Library\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Library\Shader\ShaderManager.cpp">
+      <Filter>Library\Shader</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />
@@ -249,52 +357,58 @@
     </Manifest>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Shader\Header\Primitive2D.hlsli">
-      <Filter>Shader\Header</Filter>
+    <None Include="Library\Shader\Header\Model.hlsli">
+      <Filter>Library\Shader\Header</Filter>
     </None>
-    <None Include="Shader\Header\SpriteHeader.hlsli">
-      <Filter>Shader\Header</Filter>
+    <None Include="Library\Shader\Header\Primitive2D.hlsli">
+      <Filter>Library\Shader\Header</Filter>
     </None>
-    <None Include="Shader\Header\Primitive3D.hlsli">
-      <Filter>Shader\Header</Filter>
+    <None Include="Library\Shader\Header\Primitive3D.hlsli">
+      <Filter>Library\Shader\Header</Filter>
     </None>
-    <None Include="Shader\Header\Model.hlsli">
-      <Filter>Shader\Header</Filter>
+    <None Include="Library\Shader\Header\SkinningModel.hlsli">
+      <Filter>Library\Shader\Header</Filter>
     </None>
-    <None Include="Shader\Header\SkinningModel.hlsli">
-      <Filter>Shader\Header</Filter>
+    <None Include="Library\Shader\Header\SpriteHeader.hlsli">
+      <Filter>Library\Shader\Header</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="Shader\PixelShader\Primitive2DPixelShader.hlsl">
-      <Filter>Shader\PixelShader</Filter>
+    <FxCompile Include="Library\Shader\PixelShader\ModelPixelShader.hlsl">
+      <Filter>Library\Shader\PixelShader</Filter>
     </FxCompile>
-    <FxCompile Include="Shader\VertexShader\Primitive2DVertexShader.hlsl">
-      <Filter>Shader\VertexShader</Filter>
+    <FxCompile Include="Library\Shader\PixelShader\Primitive2DPixelShader.hlsl">
+      <Filter>Library\Shader\PixelShader</Filter>
     </FxCompile>
-    <FxCompile Include="Shader\PixelShader\SpritePixelShader.hlsl">
-      <Filter>Shader\PixelShader</Filter>
+    <FxCompile Include="Library\Shader\PixelShader\Primitive3DPixelShader.hlsl">
+      <Filter>Library\Shader\PixelShader</Filter>
     </FxCompile>
-    <FxCompile Include="Shader\VertexShader\SpriteVertexShader.hlsl">
-      <Filter>Shader\VertexShader</Filter>
+    <FxCompile Include="Library\Shader\PixelShader\SkinningModelPixelShader.hlsl">
+      <Filter>Library\Shader\PixelShader</Filter>
     </FxCompile>
-    <FxCompile Include="Shader\PixelShader\Primitive3DPixelShader.hlsl">
-      <Filter>Shader\PixelShader</Filter>
+    <FxCompile Include="Library\Shader\PixelShader\SpritePixelShader.hlsl">
+      <Filter>Library\Shader\PixelShader</Filter>
     </FxCompile>
-    <FxCompile Include="Shader\VertexShader\Primitive3DVertexShader.hlsl">
-      <Filter>Shader\VertexShader</Filter>
+    <FxCompile Include="Library\Shader\VertexShader\ModelVertexShader.hlsl">
+      <Filter>Library\Shader\VertexShader</Filter>
     </FxCompile>
-    <FxCompile Include="Shader\PixelShader\ModelPixelShader.hlsl">
-      <Filter>Shader\PixelShader</Filter>
+    <FxCompile Include="Library\Shader\VertexShader\Primitive2DVertexShader.hlsl">
+      <Filter>Library\Shader\VertexShader</Filter>
     </FxCompile>
-    <FxCompile Include="Shader\VertexShader\ModelVertexShader.hlsl">
-      <Filter>Shader\VertexShader</Filter>
+    <FxCompile Include="Library\Shader\VertexShader\Primitive3DVertexShader.hlsl">
+      <Filter>Library\Shader\VertexShader</Filter>
     </FxCompile>
-    <FxCompile Include="Shader\PixelShader\SkinningModelPixelShader.hlsl">
-      <Filter>Shader\PixelShader</Filter>
+    <FxCompile Include="Library\Shader\VertexShader\Primitive3DVertexShader2.hlsl">
+      <Filter>Library\Shader\VertexShader</Filter>
     </FxCompile>
-    <FxCompile Include="Shader\VertexShader\SkinningModelVertexShader.hlsl">
-      <Filter>Shader\VertexShader</Filter>
+    <FxCompile Include="Library\Shader\VertexShader\SkinningModelVertexShader.hlsl">
+      <Filter>Library\Shader\VertexShader</Filter>
+    </FxCompile>
+    <FxCompile Include="Library\Shader\VertexShader\SpriteVertexShader.hlsl">
+      <Filter>Library\Shader\VertexShader</Filter>
+    </FxCompile>
+    <FxCompile Include="Library\Shader\GeometryShader\Primitive3DGeometryShader.hlsl">
+      <Filter>Library\Shader\GeometryShader</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

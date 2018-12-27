@@ -18,7 +18,7 @@
 #include "../../../pch.h"
 
 // <自作ヘッダファイル>
-#include "../../Utility/ShaderManager.h"
+#include "../../Shader/ShaderManager.h"
 #include "ModelDeta.h"
 #include "PMDData.h"
 #include "ModelMesh.h"
@@ -45,7 +45,7 @@ namespace Library
 				// コモンステート
 				DirectX::CommonStates* m_commonStates;
 				// 頂点シェーダーのインスタンス
-				Utility::VertexShader* m_vertexShader;
+				Shader::VertexShader* m_vertexShader;
 				// ピクセルシェーダーのインスタンス
 				ID3D11PixelShader* m_pixelShader;
 

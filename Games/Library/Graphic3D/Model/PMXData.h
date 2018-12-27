@@ -16,9 +16,6 @@
 // <標準ヘッダファイル>
 #include <vector>
 #include <string>
-#include <iostream>
-#include <fstream>
-#include <memory>
 
 
 // 名前空間の定義 ================================================================
@@ -73,11 +70,11 @@ namespace Library
 			// 頂点スキニングタイプ
 			enum PMXVertexSkinningType : uint8_t
 			{
-				BDEF1 = 0,	// ボーンのみ
-				BDEF2 = 1,	// ボーン2つと、ボーン1のウェイト値(PMD方式)
-				BDEF4 = 2,	// ボーン4つと、それぞれのウェイト値。ウェイト合計が1.0である保障はしない
-				SDEF  = 3,	// BDEF2に加え、SDEF用のfloat3(Vector3)が3つ。実際の計算ではさらに補正値の算出が必要(一応そのままBDEF2としても使用可能)と可変サイズになるので注意。
-				QDEF  = 4,
+				PMX_BDEF1 = 0,	// ボーンのみ
+				PMX_BDEF2 = 1,	// ボーン2つと、ボーン1のウェイト値(PMD方式)
+				PMX_BDEF4 = 2,	// ボーン4つと、それぞれのウェイト値。ウェイト合計が1.0である保障はしない
+				PMX_SDEF  = 3,	// BDEF2に加え、SDEF用のfloat3(Vector3)が3つ。実際の計算ではさらに補正値の算出が必要(一応そのままBDEF2としても使用可能)と可変サイズになるので注意。
+				PMX_QDEF  = 4,
 			};
 
 			// 頂点スキニング
@@ -462,28 +459,28 @@ namespace Library
 				}
 			};
 
-			enum MorphType : uint8_t
+			enum PMXMorphType : uint8_t
 			{
-				GROUP           = 0,
-				VERTEX          = 1,
-				BONE            = 2,
-				UV              = 3,
-				ADDITIONAL_UV1  = 4,
-				ADDITIONAL_UV2  = 5,
-				ADDITIONAL_UV3  = 6,
-				ADDITIONAL_UV4  = 7,
-				MATERIAL        = 8,
-				FLIP            = 9,
-				IMPULSE         = 10,
+				PMX_GROUP           = 0,
+				PMX_VERTEX          = 1,
+				PMX_BONE            = 2,
+				PMX_UV              = 3,
+				PMX_ADDITIONAL_UV1  = 4,
+				PMX_ADDITIONAL_UV2  = 5,
+				PMX_ADDITIONAL_UV3  = 6,
+				PMX_ADDITIONAL_UV4  = 7,
+				PMX_MATERIAL        = 8,
+				PMX_FLIP            = 9,
+				PMX_IMPULSE         = 10,
 			};
 
-			enum MorphCategory : uint8_t
+			enum PMXMorphCategory : uint8_t
 			{
-				RESERVED_CATEGORY = 0,
-				EYEBROW           = 1,
-				EYE               = 2,
-				MOUTH             = 3,
-				OTHER             = 4,
+				PMX_RESERVED_CATEGORY = 0,
+				PMX_EYEBROW           = 1,
+				PMX_EYE               = 2,
+				PMX_MOUTH             = 3,
+				PMX_OTHER             = 4,
 			};
 
 			struct PMXMorphOffset
@@ -669,9 +666,9 @@ namespace Library
 				// モーフ英名
 				std::wstring morphEnglishName;
 				// カテゴリ
-				MorphCategory category;
+				PMXMorphCategory category;
 				// モーフタイプ
-				MorphType morphType;
+				PMXMorphType morphType;
 				// オフセット数
 				int offsetCount;
 				// 頂点モーフ配列
@@ -801,12 +798,12 @@ namespace Library
 
 			enum PMXJointType : uint8_t
 			{
-				GENERIC_6_DOF_SPRING = 0,
-				GENERIC_6_DOF        = 1,
-				POINT_2_POINT        = 2,
-				CONE_TWIST           = 3,
-				SLIDER               = 5,
-				HINGE                = 6
+				PMX_GENERIC_6_DOF_SPRING = 0,
+				PMX_GENERIC_6_DOF        = 1,
+				PMX_POINT_2_POINT        = 2,
+				PMX_CONE_TWIST           = 3,
+				PMX_SLIDER               = 5,
+				PMX_HINGE                = 6
 			};
 
 			struct PMXJointParam
@@ -852,9 +849,9 @@ namespace Library
 
 			enum PMXSoftBodyFlag : uint8_t
 			{
-				B_LINK  = 0x01,
-				CLUSTER = 0x02,
-				LINK    = 0x04
+				PMX_B_LINK  = 0x01,
+				PMX_CLUSTER = 0x02,
+				PMX_LINK    = 0x04
 			};
 
 			struct PMXAnchorRigidbody

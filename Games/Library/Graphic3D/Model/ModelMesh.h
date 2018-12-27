@@ -18,7 +18,7 @@
 #include "../../../pch.h"
 
 // <自作ヘッダファイル>
-#include "../../Utility/ShaderManager.h"
+#include "../../Shader/ShaderManager.h"
 #include "ModelDeta.h"
 
 

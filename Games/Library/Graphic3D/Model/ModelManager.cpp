@@ -425,7 +425,7 @@ Graphic3D::Model::PMDModel* Graphic3D::Model::ModelManager::CreatePMDModel(ifstr
 
 			for (uint32_t i = 0; i < faceNumber; ++i)
 			{
-				if (model->faces[i].type == FaceCategory::Base) continue;
+				if (model->faces[i].type == PMDFaceCategory::PMD_BASE) continue;
 
 				char buffer[20];
 				stream->read(buffer, 20);
@@ -612,19 +612,19 @@ Graphic3D::Model::PMXModel* Graphic3D::Model::ModelManager::CreatePMXModel(ifstr
 			stream->read((char*) &pmxModel->vertexes[i].skinningType, sizeof(PMXVertexSkinningType));
 			switch (pmxModel->vertexes[i].skinningType)
 			{
-			case PMXVertexSkinningType::BDEF1:
+			case PMXVertexSkinningType::PMX_BDEF1:
 				pmxModel->vertexes[i].skinning = new PMXVertexSkinningBDEF1();
 				break;
-			case PMXVertexSkinningType::BDEF2:
+			case PMXVertexSkinningType::PMX_BDEF2:
 				pmxModel->vertexes[i].skinning = new PMXVertexSkinningBDEF2();
 				break;
-			case PMXVertexSkinningType::BDEF4:
+			case PMXVertexSkinningType::PMX_BDEF4:
 				pmxModel->vertexes[i].skinning = new PMXVertexSkinningBDEF4();
 				break;
-			case PMXVertexSkinningType::SDEF:
+			case PMXVertexSkinningType::PMX_SDEF:
 				pmxModel->vertexes[i].skinning = new PMXVertexSkinningSDEF();
 				break;
-			case PMXVertexSkinningType::QDEF:
+			case PMXVertexSkinningType::PMX_QDEF:
 				pmxModel->vertexes[i].skinning = new PMXVertexSkinningQDEF();
 				break;
 			default:
@@ -785,13 +785,13 @@ Graphic3D::Model::PMXModel* Graphic3D::Model::ModelManager::CreatePMXModel(ifstr
 		{
 			pmxModel->morphs[i].morphName = ReadString(stream, pmxModel->setting.encoding);
 			pmxModel->morphs[i].morphEnglishName = ReadString(stream, pmxModel->setting.encoding);
-			stream->read((char*)&pmxModel->morphs[i].category, sizeof(MorphCategory));
-			stream->read((char*)&pmxModel->morphs[i].morphType, sizeof(MorphType));
+			stream->read((char*)&pmxModel->morphs[i].category, sizeof(PMXMorphCategory));
+			stream->read((char*)&pmxModel->morphs[i].morphType, sizeof(PMXMorphType));
 			stream->read((char*) &pmxModel->morphs[i].offsetCount, sizeof(int));
 
 			switch (pmxModel->morphs[i].morphType)
 			{
-			case MorphType::GROUP:
+			case PMXMorphType::PMX_GROUP:
 				// サイズの確保
 				pmxModel->morphs[i].groupOffsets.resize(pmxModel->morphs[i].offsetCount);
 				for (int j = 0; j < pmxModel->morphs[i].offsetCount; ++j)
@@ -800,7 +800,7 @@ Graphic3D::Model::PMXModel* Graphic3D::Model::ModelManager::CreatePMXModel(ifstr
 					stream->read((char*) &pmxModel->morphs[i].groupOffsets[j].morphWeight, sizeof(float));
 				}
 				break;
-			case MorphType::VERTEX:
+			case PMXMorphType::PMX_VERTEX:
 				// サイズの確保
 				pmxModel->morphs[i].vertexOffsets.resize(pmxModel->morphs[i].offsetCount);
 				for (int j = 0; j < pmxModel->morphs[i].offsetCount; ++j)
@@ -809,7 +809,7 @@ Graphic3D::Model::PMXModel* Graphic3D::Model::ModelManager::CreatePMXModel(ifstr
 					stream->read((char*)pmxModel->morphs[i].vertexOffsets[j].positionOffset, sizeof(float) * 3);
 				}
 				break;
-			case MorphType::BONE:
+			case PMXMorphType::PMX_BONE:
 				// サイズの確保
 				pmxModel->morphs[i].boneOffsets.resize(pmxModel->morphs[i].offsetCount);
 				for (int j = 0; j < pmxModel->morphs[i].offsetCount; ++j)
@@ -819,7 +819,7 @@ Graphic3D::Model::PMXModel* Graphic3D::Model::ModelManager::CreatePMXModel(ifstr
 					stream->read((char*)pmxModel->morphs[i].boneOffsets[j].rotation, sizeof(float) * 4);
 				}
 				break;
-			case MorphType::MATERIAL:
+			case PMXMorphType::PMX_MATERIAL:
 				// サイズの確保
 				pmxModel->morphs[i].materialOffsets.resize(pmxModel->morphs[i].offsetCount);
 				for (int j = 0; j < pmxModel->morphs[i].offsetCount; ++j)
@@ -837,11 +837,11 @@ Graphic3D::Model::PMXModel* Graphic3D::Model::ModelManager::CreatePMXModel(ifstr
 					stream->read((char*)pmxModel->morphs[i].materialOffsets[j].toonTextureArgb, sizeof(float) * 4);
 				}
 				break;
-			case MorphType::UV:
-			case MorphType::ADDITIONAL_UV1:
-			case MorphType::ADDITIONAL_UV2:
-			case MorphType::ADDITIONAL_UV3:
-			case MorphType::ADDITIONAL_UV4:
+			case PMXMorphType::PMX_UV:
+			case PMXMorphType::PMX_ADDITIONAL_UV1:
+			case PMXMorphType::PMX_ADDITIONAL_UV2:
+			case PMXMorphType::PMX_ADDITIONAL_UV3:
+			case PMXMorphType::PMX_ADDITIONAL_UV4:
 				// サイズの確保
 				pmxModel->morphs[i].uvOffsets.resize(pmxModel->morphs[i].offsetCount);
 				for (int j = 0; j < pmxModel->morphs[i].offsetCount; ++j)

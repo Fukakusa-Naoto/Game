@@ -25,7 +25,8 @@ using namespace Library;
 //!
 //! @parameter [void] なし
 //--------------------------------------------------------------------
-Scene::SceneManager::SceneManager()
+Scene::SceneManager::SceneManager() :
+	m_nextScene(nullptr)
 {
 	// 何もしない
 }
@@ -98,6 +99,8 @@ void Scene::SceneManager::Start(string startScene)
 //--------------------------------------------------------------------
 void Scene::SceneManager::UpdateActiveScene(const Common::StepTimer& timer)
 {
+	if (m_nextScene) ChangeScene();
+
 	if (!m_activeScene.empty()) m_activeScene.back()->Update(timer);
 }
 
@@ -132,12 +135,7 @@ bool Scene::SceneManager::LoadScene(string nextScene)
 {
 	if (m_sceneList.count(nextScene) != 0)
 	{
-		for (list<SceneBase*>::iterator itr = m_activeScene.begin(); itr != m_activeScene.end(); ++itr) (*itr)->Finalize();
-		m_activeScene.clear();
-
-		m_activeScene.push_back(m_sceneList[nextScene]);
-		m_activeScene.back()->Initialize();
-
+		m_nextScene = m_sceneList[nextScene];
 		return true;
 	}
 	else return false;
@@ -212,4 +210,24 @@ Scene::SceneBase* Scene::SceneManager::CheckScene(const list<SceneBase*>& sceneL
 	}
 
 	return nullptr;
+}
+
+
+
+//--------------------------------------------------------------------
+//! @summary   シーンの変更
+//!
+//! @parameter [void] なし
+//!
+//! @return    なし
+//--------------------------------------------------------------------
+void Scene::SceneManager::ChangeScene()
+{
+	for (list<SceneBase*>::iterator itr = m_activeScene.begin(); itr != m_activeScene.end(); ++itr) (*itr)->Finalize();
+	m_activeScene.clear();
+
+	m_activeScene.push_back(m_nextScene);
+	m_activeScene.back()->Initialize();
+
+	m_nextScene = nullptr;
 }

@@ -56,9 +56,7 @@
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="ExtensionSettings">
-    <Import Project="$(VCTargetsPath)\BuildCustomizations\MeshContentTask.props" />
-  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings" />
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
@@ -160,7 +158,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Game\Game.h" />
+    <ClInclude Include="Library\Animation\MotionManager.h" />
+    <ClInclude Include="Library\Animation\VMDData.h" />
     <ClInclude Include="Library\Camera\Camera.h" />
+    <ClInclude Include="Library\Collision\Collision.h" />
+    <ClInclude Include="Library\Collision\CollisionInterface.h" />
+    <ClInclude Include="Library\Collision\CollisionManager.h" />
+    <ClInclude Include="Library\Collision\CollisionShape.h" />
+    <ClInclude Include="Library\Collision\CubeShape.h" />
+    <ClInclude Include="Library\Collision\SphereShape.h" />
     <ClInclude Include="Library\Common\DeviceResources.h" />
     <ClInclude Include="Library\Common\StepTimer.h" />
     <ClInclude Include="Library\Debug\DebugCamera.h" />
@@ -170,6 +176,8 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="Library\Graphic2D\Sprite.h" />
+    <ClInclude Include="Library\Graphic2D\UI\Canvas.h" />
+    <ClInclude Include="Library\Graphic2D\UI\SpriteUI.h" />
     <ClInclude Include="Library\Graphic3D\Model\Model.h" />
     <ClInclude Include="Library\Graphic3D\Model\ModelBone.h">
       <SubType>
@@ -194,16 +202,17 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="Library\Math\Transform.h" />
+    <ClInclude Include="Library\Physics\PhysicsManager.h" />
+    <ClInclude Include="Library\Physics\RigidBody.h" />
     <ClInclude Include="Library\Scene\SceneBase.h" />
     <ClInclude Include="Library\Scene\SceneManager.h" />
+    <ClInclude Include="Library\Shader\ShaderManager.h" />
     <ClInclude Include="Library\Sound\SoundManager.h" />
     <ClInclude Include="Library\Sound\SoundPlayer.h" />
+    <ClInclude Include="Library\System\ControllerBase.h" />
+    <ClInclude Include="Library\System\GameObject.h" />
     <ClInclude Include="Library\System\SingletonBase.h" />
     <ClInclude Include="Library\Utility\BinaryFileLoader.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="Library\Utility\ShaderManager.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -215,7 +224,28 @@
     <ClCompile Include="Game\Game.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../pch.h</PrecompiledHeaderFile>
     </ClCompile>
+    <ClCompile Include="Library\Animation\MotionManager.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="Library\Camera\Camera.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="Library\Collision\Collision.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="Library\Collision\CollisionInterface.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Library\Collision\CollisionManager.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Library\Collision\CollisionShape.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="Library\Collision\CubeShape.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="Library\Collision\SphereShape.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <ClCompile Include="Library\Common\DeviceResources.cpp">
@@ -233,6 +263,9 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <ClCompile Include="Library\Graphic2D\Sprite.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="Library\Graphic2D\UI\Canvas.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <ClCompile Include="Library\Graphic3D\Model\Model.cpp">
@@ -266,11 +299,20 @@
     <ClCompile Include="Library\Math\Transform.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../pch.h</PrecompiledHeaderFile>
     </ClCompile>
+    <ClCompile Include="Library\Physics\PhysicsManager.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="Library\Physics\RigidBody.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../pch.h</PrecompiledHeaderFile>
+    </ClCompile>
     <ClCompile Include="Library\Scene\SceneBase.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Library\Scene\SceneManager.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Library\Shader\ShaderManager.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <ClCompile Include="Library\Sound\SoundManager.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
@@ -278,15 +320,13 @@
     <ClCompile Include="Library\Sound\SoundPlayer.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Library\System\GameObject.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../pch.h</PrecompiledHeaderFile>
+    </ClCompile>
     <ClCompile Include="Library\Utility\BinaryFileLoader.cpp">
       <SubType>
       </SubType>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="Library\Utility\ShaderManager.cpp">
-      <SubType>
-      </SubType>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <ClCompile Include="Library\Utility\String.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
@@ -312,68 +352,63 @@
     <Manifest Include="settings.manifest" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Shader\Header\Model.hlsli" />
-    <None Include="Shader\Header\Primitive2D.hlsli" />
-    <None Include="Shader\Header\Primitive3D.hlsli" />
-    <None Include="Shader\Header\SkinningModel.hlsli" />
-    <None Include="Shader\Header\SpriteHeader.hlsli" />
+    <None Include="Library\Shader\Header\Model.hlsli" />
+    <None Include="Library\Shader\Header\Primitive2D.hlsli" />
+    <None Include="Library\Shader\Header\Primitive3D.hlsli" />
+    <None Include="Library\Shader\Header\SkinningModel.hlsli" />
+    <None Include="Library\Shader\Header\SpriteHeader.hlsli" />
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="Shader\PixelShader\ModelPixelShader.hlsl">
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Resources\\Shaders\\PixelShader\\%(Filename).cso</ObjectFileOutput>
+    <FxCompile Include="Library\Shader\GeometryShader\Primitive3DGeometryShader.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Geometry</ShaderType>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Resources\\Shaders\\GeometryShader\\%(Filename).cso</ObjectFileOutput>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">4.0</ShaderModel>
     </FxCompile>
-    <FxCompile Include="Shader\PixelShader\Primitive2DPixelShader.hlsl">
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Resources\\Shaders\\PixelShader\\%(Filename).cso</ObjectFileOutput>
-    </FxCompile>
-    <FxCompile Include="Shader\PixelShader\Primitive3DPixelShader.hlsl">
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Resources\\Shaders\\PixelShader\\%(Filename).cso</ObjectFileOutput>
-    </FxCompile>
-    <FxCompile Include="Shader\PixelShader\SkinningModelPixelShader.hlsl">
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Resources\\Shaders\\PixelShader\\%(Filename).cso</ObjectFileOutput>
-    </FxCompile>
-    <FxCompile Include="Shader\PixelShader\SpritePixelShader.hlsl">
+    <FxCompile Include="Library\Shader\PixelShader\ModelPixelShader.hlsl">
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Resources\\Shaders\\PixelShader\\%(Filename).cso</ObjectFileOutput>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
     </FxCompile>
-    <FxCompile Include="Shader\VertexShader\ModelVertexShader.hlsl">
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+    <FxCompile Include="Library\Shader\PixelShader\Primitive2DPixelShader.hlsl">
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Resources\\Shaders\\PixelShader\\%(Filename).cso</ObjectFileOutput>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+    </FxCompile>
+    <FxCompile Include="Library\Shader\PixelShader\Primitive3DPixelShader.hlsl">
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Resources\\Shaders\\PixelShader\\%(Filename).cso</ObjectFileOutput>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+    </FxCompile>
+    <FxCompile Include="Library\Shader\PixelShader\SkinningModelPixelShader.hlsl">
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Resources\\Shaders\\PixelShader\\%(Filename).cso</ObjectFileOutput>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+    </FxCompile>
+    <FxCompile Include="Library\Shader\PixelShader\SpritePixelShader.hlsl">
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Resources\\Shaders\\PixelShader\\%(Filename).cso</ObjectFileOutput>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+    </FxCompile>
+    <FxCompile Include="Library\Shader\VertexShader\ModelVertexShader.hlsl">
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Resources\\Shaders\\VertexShader\\%(Filename).cso</ObjectFileOutput>
-    </FxCompile>
-    <FxCompile Include="Shader\VertexShader\Primitive2DVertexShader.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Resources\\Shaders\\VertexShader\\%(Filename).cso</ObjectFileOutput>
     </FxCompile>
-    <FxCompile Include="Shader\VertexShader\Primitive3DVertexShader.hlsl">
+    <FxCompile Include="Library\Shader\VertexShader\Primitive2DVertexShader.hlsl">
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Resources\\Shaders\\VertexShader\\%(Filename).cso</ObjectFileOutput>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Resources\\Shaders\\VertexShader\\%(Filename).cso</ObjectFileOutput>
     </FxCompile>
-    <FxCompile Include="Shader\VertexShader\SkinningModelVertexShader.hlsl">
+    <FxCompile Include="Library\Shader\VertexShader\Primitive3DVertexShader.hlsl">
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Resources\\Shaders\\VertexShader\\%(Filename).cso</ObjectFileOutput>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Resources\\Shaders\\VertexShader\\%(Filename).cso</ObjectFileOutput>
     </FxCompile>
-    <FxCompile Include="Shader\VertexShader\SpriteVertexShader.hlsl">
+    <FxCompile Include="Library\Shader\VertexShader\Primitive3DVertexShader2.hlsl">
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Resources\\Shaders\\VertexShader\\%(Filename).cso</ObjectFileOutput>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+    </FxCompile>
+    <FxCompile Include="Library\Shader\VertexShader\SkinningModelVertexShader.hlsl">
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Resources\\Shaders\\VertexShader\\%(Filename).cso</ObjectFileOutput>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+    </FxCompile>
+    <FxCompile Include="Library\Shader\VertexShader\SpriteVertexShader.hlsl">
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Resources\\Shaders\\VertexShader\\%(Filename).cso</ObjectFileOutput>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
     </FxCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
-  <ImportGroup Label="ExtensionTargets">
-    <Import Project="$(VCTargetsPath)\BuildCustomizations\MeshContentTask.targets" />
-  </ImportGroup>
+  <ImportGroup Label="ExtensionTargets" />
 </Project>

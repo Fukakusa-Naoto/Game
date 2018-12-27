@@ -17,7 +17,6 @@
 
 // <自作ヘッダファイル>
 #include "PrimitiveManager2D.h"
-#include "../Utility/ShaderManager.h"
 #include "../Common/DeviceResources.h"
 #include "../Math/Math.h"
 
@@ -88,9 +87,12 @@ void Graphic2D::PrimitiveManager2D::Initialize()
 	m_commonStates = Common::DeviceResources::GetInstance()->GetCommonStates();
 
 	// 頂点シェーダーのインスタンスの取得
-	m_vertexShader = Utility::ShaderManager::GetInstance()->LoadVertexShader(L"Primitive2DVertexShader", INPUT_LAYOUT);
+	m_vertexShader = Shader::ShaderManager::GetInstance()->LoadVertexShader(L"Primitive2DVertexShader", INPUT_LAYOUT);
 	// ピクセルシェーダーのインスタンスの取得
-	m_pixelShader = Utility::ShaderManager::GetInstance()->LoadPixelShader(L"Primitive2DPixelShader");
+	m_pixelShader = Shader::ShaderManager::GetInstance()->LoadPixelShader(L"Primitive2DPixelShader");
+
+	// ビューポートの初期設定
+	m_defaultViewport = m_viewport = Common::DeviceResources::GetInstance()->GetScreenViewport();
 }
 
 
@@ -106,15 +108,10 @@ void Graphic2D::PrimitiveManager2D::Initialize()
 //----------------------------------------------------------------------
 void Graphic2D::PrimitiveManager2D::DrawPoint(int pointX, int pointY, XMFLOAT4 color)
 {
-	// 画面幅の作成
-	RECT rect = Common::DeviceResources::GetInstance()->GetOutputSize();
-	int screenWidth = rect.right - rect.left;
-	int screenHeight = rect.bottom - rect.top;
-
 	// 表示する点の頂点の作成
 	vector<VertexBuffer> vertexes =
 	{
-		VertexBuffer(Math::ConvertPixelToWorld(pointX, pointY, screenWidth, screenHeight), color),
+		VertexBuffer(Math::ConvertPixelToWorld(pointX, pointY, static_cast<int>(m_viewport.Width), static_cast<int>(m_viewport.Height)), color),
 	};
 
 
@@ -148,6 +145,9 @@ void Graphic2D::PrimitiveManager2D::DrawPoint(int pointX, int pointY, XMFLOAT4 c
 
 	m_deviceContext->IASetVertexBuffers(0, 1, &pVertexBuffer, &stride, &offset);
 
+
+	// ビューポートの設定
+	m_deviceContext->RSSetViewports(1, &m_viewport);
 
 	// ブレンドステートをセット
 	ID3D11BlendState* blendstate = m_commonStates->AlphaBlend();
@@ -175,6 +175,9 @@ void Graphic2D::PrimitiveManager2D::DrawPoint(int pointX, int pointY, XMFLOAT4 c
 
 	// 描画
 	m_deviceContext->Draw(vertexes.size(), 0);
+
+	// ビューポートを元に戻す
+	m_deviceContext->RSSetViewports(1, &m_defaultViewport);
 }
 
 
@@ -192,16 +195,11 @@ void Graphic2D::PrimitiveManager2D::DrawPoint(int pointX, int pointY, XMFLOAT4 c
 //----------------------------------------------------------------------
 void Graphic2D::PrimitiveManager2D::DrawLine(int startX, int startY, int endX, int endY, XMFLOAT4 color)
 {
-	// 画面幅の作成
-	RECT rect = Common::DeviceResources::GetInstance()->GetOutputSize();
-	int screenWidth = rect.right - rect.left;
-	int screenHeight = rect.bottom - rect.top;
-
 	// 表示する線の頂点の作成
 	vector<VertexBuffer> vertexes =
 	{
-		VertexBuffer(Math::ConvertPixelToWorld(startX, startY, screenWidth, screenHeight), color),
-		VertexBuffer(Math::ConvertPixelToWorld(endX, endY, screenWidth, screenHeight), color),
+		VertexBuffer(Math::ConvertPixelToWorld(startX, startY, static_cast<int>(m_viewport.Width), static_cast<int>(m_viewport.Height)), color),
+		VertexBuffer(Math::ConvertPixelToWorld(endX, endY, static_cast<int>(m_viewport.Width), static_cast<int>(m_viewport.Height)), color),
 	};
 
 
@@ -235,6 +233,8 @@ void Graphic2D::PrimitiveManager2D::DrawLine(int startX, int startY, int endX, i
 
 	m_deviceContext->IASetVertexBuffers(0, 1, &pVertexBuffer, &stride, &offset);
 
+	// ビューポートの設定
+	m_deviceContext->RSSetViewports(1, &m_viewport);
 
 	// ブレンドステートをセット
 	ID3D11BlendState* blendstate = m_commonStates->AlphaBlend();				// 半透明合成（アルファ乗算済み）
@@ -262,6 +262,9 @@ void Graphic2D::PrimitiveManager2D::DrawLine(int startX, int startY, int endX, i
 
 	// 描画
 	m_deviceContext->Draw(vertexes.size(), 0);
+
+	// ビューポートを元に戻す
+	m_deviceContext->RSSetViewports(1, &m_defaultViewport);
 }
 
 
@@ -285,9 +288,9 @@ void Graphic2D::PrimitiveManager2D::DrawTriangle(int vertexX1, int vertexY1, int
 	// 表示する三角形の頂点の作成
 	vector<VertexBuffer> vertexes =
 	{
-		VertexBuffer(Math::ConvertPixelToWorld(vertexX1, vertexY1, 800, 600), color),
-		VertexBuffer(Math::ConvertPixelToWorld(vertexX3, vertexY3, 800, 600), color),
-		VertexBuffer(Math::ConvertPixelToWorld(vertexX2, vertexY2, 800, 600), color),
+		VertexBuffer(Math::ConvertPixelToWorld(vertexX1, vertexY1, static_cast<int>(m_viewport.Width), static_cast<int>(m_viewport.Height)), color),
+		VertexBuffer(Math::ConvertPixelToWorld(vertexX3, vertexY3, static_cast<int>(m_viewport.Width), static_cast<int>(m_viewport.Height)), color),
+		VertexBuffer(Math::ConvertPixelToWorld(vertexX2, vertexY2, static_cast<int>(m_viewport.Width), static_cast<int>(m_viewport.Height)), color),
 	};
 
 
@@ -358,6 +361,9 @@ void Graphic2D::PrimitiveManager2D::DrawTriangle(int vertexX1, int vertexY1, int
 	m_deviceContext->IASetIndexBuffer(pIndexBuffer, DXGI_FORMAT_R32_UINT, 0);
 
 
+	// ビューポートの設定
+	m_deviceContext->RSSetViewports(1, &m_viewport);
+
 	// ラスタライザステートの設定
 	m_deviceContext->RSSetState(m_commonStates->CullCounterClockwise());		// 反時計回りの面をカリングする
 
@@ -389,6 +395,9 @@ void Graphic2D::PrimitiveManager2D::DrawTriangle(int vertexX1, int vertexY1, int
 
 	// 描画
 	m_deviceContext->DrawIndexed(indexData.size(), 0, 0);
+
+	// ビューポートを元に戻す
+	m_deviceContext->RSSetViewports(1, &m_defaultViewport);
 }
 
 
@@ -411,13 +420,13 @@ void Graphic2D::PrimitiveManager2D::DrawBox(int topLeftX, int topLeftY, int bott
 	vector<VertexBuffer> vertexes =
 	{
 		// 左上
-		VertexBuffer(Math::ConvertPixelToWorld(topLeftX, topLeftY, 800, 600), color),
+		VertexBuffer(Math::ConvertPixelToWorld(topLeftX, topLeftY, static_cast<int>(m_viewport.Width), static_cast<int>(m_viewport.Height)), color),
 		// 右上
-		VertexBuffer(Math::ConvertPixelToWorld(bottomRightX, topLeftY, 800, 600), color),
+		VertexBuffer(Math::ConvertPixelToWorld(bottomRightX, topLeftY, static_cast<int>(m_viewport.Width), static_cast<int>(m_viewport.Height)), color),
 		// 右下
-		VertexBuffer(Math::ConvertPixelToWorld(bottomRightX, bottomRightY, 800, 600), color),
+		VertexBuffer(Math::ConvertPixelToWorld(bottomRightX, bottomRightY, static_cast<int>(m_viewport.Width), static_cast<int>(m_viewport.Height)), color),
 		// 左下
-		VertexBuffer(Math::ConvertPixelToWorld(topLeftX, bottomRightY, 800, 600), color),
+		VertexBuffer(Math::ConvertPixelToWorld(topLeftX, bottomRightY, static_cast<int>(m_viewport.Width), static_cast<int>(m_viewport.Height)), color),
 	};
 
 
@@ -501,6 +510,9 @@ void Graphic2D::PrimitiveManager2D::DrawBox(int topLeftX, int topLeftY, int bott
 	ID3D11Buffer* pIndexBuffer = indexBuffer.Get();
 	m_deviceContext->IASetIndexBuffer(pIndexBuffer, DXGI_FORMAT_R32_UINT, 0);
 
+	// ビューポートの設定
+	m_deviceContext->RSSetViewports(1, &m_viewport);
+
 
 	// ラスタライザステートの設定
 	m_deviceContext->RSSetState(m_commonStates->CullCounterClockwise());		// 反時計回りの面をカリングする
@@ -533,6 +545,9 @@ void Graphic2D::PrimitiveManager2D::DrawBox(int topLeftX, int topLeftY, int bott
 
 	// 描画
 	m_deviceContext->DrawIndexed(indexData.size(), 0, 0);
+
+	// ビューポートを元に戻す
+	m_deviceContext->RSSetViewports(1, &m_defaultViewport);
 }
 
 
@@ -559,7 +574,7 @@ void Graphic2D::PrimitiveManager2D::DrawCircle(int centerX, int centerY, int rad
 	vertexes.resize(DIVIDE + 1);
 
 	// 中心座標
-	vertexes[0].position = Math::ConvertPixelToWorld(centerX, centerY, 800, 600);
+	vertexes[0].position = Math::ConvertPixelToWorld(centerX, centerY, static_cast<int>(m_viewport.Width), static_cast<int>(m_viewport.Height));
 	vertexes[0].color = color;
 
 	// 周囲の座標
@@ -570,7 +585,7 @@ void Graphic2D::PrimitiveManager2D::DrawCircle(int centerX, int centerY, int rad
 		float y = radius * sinf(XM_2PI / DIVIDE * i);
 
 		// ピクセル座標をワールド座標へ変換
-		vertexes[i].position = Math::ConvertPixelToWorld(static_cast<int>(x) + centerX, static_cast<int>(y) + centerY, 800, 600);
+		vertexes[i].position = Math::ConvertPixelToWorld(static_cast<int>(x) + centerX, static_cast<int>(y) + centerY, static_cast<int>(m_viewport.Width), static_cast<int>(m_viewport.Height));
 
 		// 色の設定
 		vertexes[i].color = color;
@@ -662,6 +677,9 @@ void Graphic2D::PrimitiveManager2D::DrawCircle(int centerX, int centerY, int rad
 	ID3D11Buffer* pIndexBuffer = indexBuffer.Get();
 	m_deviceContext->IASetIndexBuffer(pIndexBuffer, DXGI_FORMAT_R32_UINT, 0);
 
+	// ビューポートの設定
+	m_deviceContext->RSSetViewports(1, &m_viewport);
+
 
 	// ラスタライザステートの設定
 	m_deviceContext->RSSetState(m_commonStates->CullCounterClockwise());		// 反時計回りの面をカリングする
@@ -694,4 +712,7 @@ void Graphic2D::PrimitiveManager2D::DrawCircle(int centerX, int centerY, int rad
 
 	// 描画
 	m_deviceContext->DrawIndexed(indexData.size(), 0, 0);
+
+	// ビューポートを元に戻す
+	m_deviceContext->RSSetViewports(1, &m_defaultViewport);
 }

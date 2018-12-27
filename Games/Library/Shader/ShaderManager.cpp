@@ -14,7 +14,7 @@
 
 // <自作ヘッダファイル>
 #include "ShaderManager.h"
-#include "BinaryFileLoader.h"
+#include "../Utility/BinaryFileLoader.h"
 #include "../Common/DeviceResources.h"
 
 
@@ -30,7 +30,7 @@ using namespace Library;
 //!
 //! @parameter [void] なし
 //--------------------------------------------------------------------
-Utility::ShaderManager::ShaderManager() :
+Shader::ShaderManager::ShaderManager() :
 	m_device(nullptr)
 {
 	// 何もしない
@@ -43,7 +43,7 @@ Utility::ShaderManager::ShaderManager() :
 //!
 //! @parameter [void] なし
 //--------------------------------------------------------------------
-Utility::ShaderManager::~ShaderManager()
+Shader::ShaderManager::~ShaderManager()
 {
 	m_device = nullptr;
 
@@ -54,6 +54,14 @@ Utility::ShaderManager::~ShaderManager()
 		delete p.second;
 	}
 	m_vertexShaderMap.clear();
+
+	// ジオメトリシェーダー管理のマップ変数の削除
+	for (map<const wchar_t*, ID3D11GeometryShader*>::iterator itr = m_geometryShaderMap.begin(); itr != m_geometryShaderMap.end(); ++itr)
+	{
+		pair<const wchar_t*, ID3D11GeometryShader*> p = *itr;
+		if(p.second) p.second->Release();
+	}
+	m_geometryShaderMap.clear();
 
 	// ピクセルシェーダー管理のマップ変数の削除
 	for (map<const wchar_t*, ID3D11PixelShader*>::iterator itr = m_pixelShaderMap.begin(); itr != m_pixelShaderMap.end(); ++itr)
@@ -73,7 +81,7 @@ Utility::ShaderManager::~ShaderManager()
 //!
 //! @return    なし
 //--------------------------------------------------------------------
-void Utility::ShaderManager::Initialize()
+void Shader::ShaderManager::Initialize()
 {
 	// デバイス・インターフェイスの取得
 	m_device = Common::DeviceResources::GetInstance()->GetD3DDevice();
@@ -90,7 +98,7 @@ void Utility::ShaderManager::Initialize()
 //!
 //! @return    頂点シェーダーのインスタンス
 //--------------------------------------------------------------------
-Utility::VertexShader* Utility::ShaderManager::LoadVertexShader(const wchar_t* fileName, const vector<D3D11_INPUT_ELEMENT_DESC>& inputLayout)
+Shader::VertexShader* Shader::ShaderManager::LoadVertexShader(const wchar_t* fileName, const vector<D3D11_INPUT_ELEMENT_DESC>& inputLayout)
 {
 	// 頂点シェーダー・オブジェクトがない
 	if (m_vertexShaderMap.count(fileName) == 0)
@@ -98,7 +106,7 @@ Utility::VertexShader* Utility::ShaderManager::LoadVertexShader(const wchar_t* f
 		// シェーダーの読み込み
 		// ファイルまでのパスを作成
 		wstring fullPass = wstring(L"Resources/Shaders/VertexShader/") + fileName + wstring(L".cso");
-		BinaryData vertexShader = LoadBinaryFile(fullPass.c_str());
+		Utility::BinaryData vertexShader = Utility::LoadBinaryFile(fullPass.c_str());
 
 		// 入力レイアウト・オブジェクトの作成
 		ID3D11InputLayout* inputLayoutObject;
@@ -138,7 +146,7 @@ Utility::VertexShader* Utility::ShaderManager::LoadVertexShader(const wchar_t* f
 //!
 //! @return    ピクセルシェーダーのインスタンス
 //--------------------------------------------------------------------
-ID3D11PixelShader* Utility::ShaderManager::LoadPixelShader(const wchar_t* fileName)
+ID3D11PixelShader* Shader::ShaderManager::LoadPixelShader(const wchar_t* fileName)
 {
 	// ピクセルシェーダー・オブジェクトがない
 	if (m_pixelShaderMap.count(fileName) == 0)
@@ -146,7 +154,7 @@ ID3D11PixelShader* Utility::ShaderManager::LoadPixelShader(const wchar_t* fileNa
 		// シェーダーの読み込み
 		// ファイルまでのパスを作成
 		wstring fullPass = wstring(L"Resources/Shaders/PixelShader/") + fileName + wstring(L".cso");
-		BinaryData pixelShader = LoadBinaryFile(fullPass.c_str());
+		Utility::BinaryData pixelShader = Utility::LoadBinaryFile(fullPass.c_str());
 
 		// ピクセルシェーダー・オブジェクトの作成
 		ID3D11PixelShader* pixelShaderObject;
@@ -162,4 +170,40 @@ ID3D11PixelShader* Utility::ShaderManager::LoadPixelShader(const wchar_t* fileNa
 
 	// ピクセルシェーダーのインスタンスを渡す
 	return m_pixelShaderMap[fileName];
+}
+
+
+
+//--------------------------------------------------------------------
+//! @summary   ジオメトリシェーダーを読み込みシェーダー・オブジェクト
+//!			   を作成する
+//!
+//! @parameter [fileName] 読み込むファイル
+//!
+//! @return    ジオメトリシェーダーのインスタンス
+//--------------------------------------------------------------------
+ID3D11GeometryShader* Shader::ShaderManager::LoadGeometryShader(const wchar_t* fileName)
+{
+	// ピクセルシェーダー・オブジェクトがない
+	if (m_geometryShaderMap.count(fileName) == 0)
+	{
+		// シェーダーの読み込み
+		// ファイルまでのパスを作成
+		wstring fullPass = wstring(L"Resources/Shaders/GeometryShader/") + fileName + wstring(L".cso");
+		Utility::BinaryData geometryShader = Utility::LoadBinaryFile(fullPass.c_str());
+
+		// ピクセルシェーダー・オブジェクトの作成
+		ID3D11GeometryShader* geometryShaderObject;
+		if (FAILED(m_device->CreateGeometryShader(geometryShader.GetData(), geometryShader.size, NULL, &geometryShaderObject)))
+		{
+			wstring message = fileName + wstring(L"・オブジェクトの作成に失敗しました");
+			MessageBox(NULL, message.c_str(), TEXT("エラー"), MB_OK);
+		}
+
+		// マップに保存
+		m_geometryShaderMap[fileName] = geometryShaderObject;
+	}
+
+	// ピクセルシェーダーのインスタンスを渡す
+	return m_geometryShaderMap[fileName];
 }
