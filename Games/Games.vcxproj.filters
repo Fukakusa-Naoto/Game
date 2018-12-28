@@ -101,6 +101,48 @@
     <Filter Include="Shader\GeometryShader">
       <UniqueIdentifier>{9dff3075-084b-469c-bd01-df13467c9168}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Play">
+      <UniqueIdentifier>{6dbfd990-2e54-4dfe-8deb-9fae76916e65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Play\Controller">
+      <UniqueIdentifier>{c12de3cf-ecc0-4897-9732-4b8c3498eda8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Play\Object">
+      <UniqueIdentifier>{3c4b6e64-a041-417a-8ff8-41c91653b56c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Play\Controller\Enemy">
+      <UniqueIdentifier>{9cca0b62-03fc-4191-988a-d3987f1da518}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Play\Object\Enemy">
+      <UniqueIdentifier>{a91263bc-2ae4-426d-888a-44ebd1afeddf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Play\Object\Stage">
+      <UniqueIdentifier>{72a66300-fafc-4314-9145-b3d1b1951c6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Play\Object\UI">
+      <UniqueIdentifier>{d1a9e4bb-54fd-492f-b511-ef6774e73a2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Play\Object\UI\Animation">
+      <UniqueIdentifier>{9a5a8195-2294-4d18-ae71-c7cd2379c5ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Play\Object\UI\Parts">
+      <UniqueIdentifier>{bfbec0e9-199c-49cb-ab90-f47b2037b56b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Scenes">
+      <UniqueIdentifier>{746137e9-0037-404f-9769-2c460e486476}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Title">
+      <UniqueIdentifier>{3c0df68f-1be2-41d9-8403-50bdcc5ba58a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Title\Object">
+      <UniqueIdentifier>{08a8bbe0-4ccb-47f8-b0b2-b2cc3e2591b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Title\Object\UI">
+      <UniqueIdentifier>{4876a755-d6f9-4a6f-a5ae-e324c64d87ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Utility">
+      <UniqueIdentifier>{973a4bfd-384b-4752-8b91-85ec298d0126}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -233,6 +275,120 @@
     <ClInclude Include="Library\Shader\ShaderManager.h">
       <Filter>Library\Shader</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Play\Controller\Enemy\EnemyController.h">
+      <Filter>Game\Play\Controller\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Play\Controller\PlayerController.h">
+      <Filter>Game\Play\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Play\Controller\TileController.h">
+      <Filter>Game\Play\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Play\Object\Enemy\Enemy.h">
+      <Filter>Game\Play\Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Play\Object\Stage\Tile.h">
+      <Filter>Game\Play\Object\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Play\Object\Player.h">
+      <Filter>Game\Play\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Play\Object\UI\Number.h">
+      <Filter>Game\Play\Object\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Play\Object\UI\ReadyAndGo.h">
+      <Filter>Game\Play\Object\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Play\Object\UI\RemainingLives.h">
+      <Filter>Game\Play\Object\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Play\Object\UI\Round.h">
+      <Filter>Game\Play\Object\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Play\Object\UI\UIFrame.h">
+      <Filter>Game\Play\Object\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Play\Object\UI\Animator.h">
+      <Filter>Game\Play\Object\UI\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Play\Object\UI\AnimeCrip.h">
+      <Filter>Game\Play\Object\UI\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Play\Object\UI\Take1.h">
+      <Filter>Game\Play\Object\UI\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Play\Object\UI\Take2.h">
+      <Filter>Game\Play\Object\UI\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Play\Object\UI\Take3.h">
+      <Filter>Game\Play\Object\UI\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Play\Object\UI\Take4.h">
+      <Filter>Game\Play\Object\UI\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Play\Object\UI\Take5.h">
+      <Filter>Game\Play\Object\UI\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Play\Object\UI\Take6.h">
+      <Filter>Game\Play\Object\UI\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Play\Object\UI\Take7.h">
+      <Filter>Game\Play\Object\UI\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Play\Object\UI\Take8.h">
+      <Filter>Game\Play\Object\UI\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Play\Object\UI\BackgroundParts.h">
+      <Filter>Game\Play\Object\UI\Parts</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Play\Object\UI\BottomParts.h">
+      <Filter>Game\Play\Object\UI\Parts</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Play\Object\UI\ItemBackgroundParts.h">
+      <Filter>Game\Play\Object\UI\Parts</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Play\Object\UI\LargeScreenParts.h">
+      <Filter>Game\Play\Object\UI\Parts</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Play\Object\UI\SmallScreenParts.h">
+      <Filter>Game\Play\Object\UI\Parts</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Play\Object\UI\TopParts.h">
+      <Filter>Game\Play\Object\UI\Parts</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Scenes\PlayScene.h">
+      <Filter>Game\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Scenes\TitleScene.h">
+      <Filter>Game\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Title\Object\UI\BaseBackground.h">
+      <Filter>Game\Title\Object\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Title\Object\UI\SelectUI.h">
+      <Filter>Game\Title\Object\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Title\Object\UI\TileBackground.h">
+      <Filter>Game\Title\Object\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Title\Object\UI\Title.h">
+      <Filter>Game\Title\Object\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Utility\EnemyManager.h">
+      <Filter>Game\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Utility\ObjactTag.h">
+      <Filter>Game\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Utility\ScoreManager.h">
+      <Filter>Game\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Utility\StageManager.h">
+      <Filter>Game\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Utility\TaskManager.h">
+      <Filter>Game\Utility</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
@@ -342,6 +498,117 @@
     <ClCompile Include="Library\Shader\ShaderManager.cpp">
       <Filter>Library\Shader</Filter>
     </ClCompile>
+    <ClCompile Include="Game\Play\Controller\Enemy\EnemyController.cpp">
+      <Filter>Game\Play\Controller\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Play\Controller\PlayerController.cpp">
+      <Filter>Game\Play\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Play\Controller\TileController.cpp">
+      <Filter>Game\Play\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Play\Object\Enemy\Enemy.cpp">
+      <Filter>Game\Play\Object\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Play\Object\Stage\Tile.cpp">
+      <Filter>Game\Play\Object\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Play\Object\Player.cpp">
+      <Filter>Game\Play\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Play\Object\UI\Number.cpp">
+      <Filter>Game\Play\Object\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Play\Object\UI\ReadyAndGo.cpp">
+      <Filter>Game\Play\Object\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Play\Object\UI\RemainingLives.cpp">
+      <Filter>Game\Play\Object\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Play\Object\UI\Round.cpp">
+      <Filter>Game\Play\Object\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Play\Object\UI\UIFrame.cpp">
+      <Filter>Game\Play\Object\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Play\Object\UI\Animator.cpp">
+      <Filter>Game\Play\Object\UI\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Play\Object\UI\AnimeCrip.cpp">
+      <Filter>Game\Play\Object\UI\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Play\Object\UI\Take1.cpp">
+      <Filter>Game\Play\Object\UI\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Play\Object\UI\Take2.cpp">
+      <Filter>Game\Play\Object\UI\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Play\Object\UI\Take3.cpp">
+      <Filter>Game\Play\Object\UI\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Play\Object\UI\Take4.cpp">
+      <Filter>Game\Play\Object\UI\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Play\Object\UI\Take5.cpp">
+      <Filter>Game\Play\Object\UI\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Play\Object\UI\Take6.cpp">
+      <Filter>Game\Play\Object\UI\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Play\Object\UI\Take7.cpp">
+      <Filter>Game\Play\Object\UI\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Play\Object\UI\Take8.cpp">
+      <Filter>Game\Play\Object\UI\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Play\Object\UI\BackgroundParts.cpp">
+      <Filter>Game\Play\Object\UI\Parts</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Play\Object\UI\BottomParts.cpp">
+      <Filter>Game\Play\Object\UI\Parts</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Play\Object\UI\ItemBackgroundParts.cpp">
+      <Filter>Game\Play\Object\UI\Parts</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Play\Object\UI\LargeScreenParts.cpp">
+      <Filter>Game\Play\Object\UI\Parts</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Play\Object\UI\SmallScreenParts.cpp">
+      <Filter>Game\Play\Object\UI\Parts</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Play\Object\UI\TopParts.cpp">
+      <Filter>Game\Play\Object\UI\Parts</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Scenes\PlayScene.cpp">
+      <Filter>Game\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Scenes\TitleScene.cpp">
+      <Filter>Game\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Title\Object\UI\BaseBackground.cpp">
+      <Filter>Game\Title\Object\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Title\Object\UI\SelectUI.cpp">
+      <Filter>Game\Title\Object\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Title\Object\UI\TileBackground.cpp">
+      <Filter>Game\Title\Object\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Title\Object\UI\Title.cpp">
+      <Filter>Game\Title\Object\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Utility\EnemyManager.cpp">
+      <Filter>Game\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Utility\ScoreManager.cpp">
+      <Filter>Game\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Utility\StageManager.cpp">
+      <Filter>Game\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Utility\TaskManager.cpp">
+      <Filter>Game\Utility</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />
@@ -371,6 +638,9 @@
     </None>
     <None Include="Library\Shader\Header\SpriteHeader.hlsli">
       <Filter>Library\Shader\Header</Filter>
+    </None>
+    <None Include="Shader\Header\TileBackground.hlsli">
+      <Filter>Shader\Header</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -409,6 +679,15 @@
     </FxCompile>
     <FxCompile Include="Library\Shader\GeometryShader\Primitive3DGeometryShader.hlsl">
       <Filter>Library\Shader\GeometryShader</Filter>
+    </FxCompile>
+    <FxCompile Include="Shader\VertexShader\TileBackgroundVertexShader.hlsl">
+      <Filter>Shader\VertexShader</Filter>
+    </FxCompile>
+    <FxCompile Include="Shader\PixelShader\TileBackgroundPixelShader.hlsl">
+      <Filter>Shader\PixelShader</Filter>
+    </FxCompile>
+    <FxCompile Include="Shader\PixelShader\TilePixelShader.hlsl">
+      <Filter>Shader\PixelShader</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

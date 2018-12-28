@@ -14,11 +14,9 @@
 
 // <自作ヘッダーファイル>
 #include "Game.h"
-
-
-// 共有する変数・関数の宣言 =================================================
-// ゲーム終了関数
-extern void ExitGame();
+#include "Scenes/PlayScene.h"
+#include "Scenes/TitleScene.h"
+#include "Utility/ScoreManager.h"
 
 
 // usingディレクティブ =====================================================
@@ -29,8 +27,12 @@ using namespace Library;
 
 
 // 定数の定義 ==============================================================
+// 画面の幅
+const int Game::SCREEN_WIDTH = 1280;
+// 画面の高さ
+const int Game::SCREEN_HEIGHT = 720;
 // ゲームタイトル
-const wstring Game::GAME_TITLE = L"Game";
+const wstring Game::GAME_TITLE = L"Motos";
 
 
 // 関数の定義 ==============================================================
@@ -41,7 +43,8 @@ const wstring Game::GAME_TITLE = L"Game";
 //! @parameter [nCmdShow]
 //--------------------------------------------------------------------
 Game::Game(HINSTANCE hInstance, int nCmdShow) :
-	Framework(hInstance, nCmdShow, SCREEN_WIDTH, SCREEN_HEIGHT, GAME_TITLE)
+	Framework(hInstance, nCmdShow, SCREEN_WIDTH, SCREEN_HEIGHT, GAME_TITLE),
+	m_sceneManager(nullptr)
 {
 	// 何もしない
 }
@@ -57,7 +60,15 @@ Game::Game(HINSTANCE hInstance, int nCmdShow) :
 //--------------------------------------------------------------------
 void Game::Initialize()
 {
+	// シーンマネージャーのインスタンスの取得
+	m_sceneManager = Scene::SceneManager::GetInstance();
 
+	// シーンの登録
+	m_sceneManager->Entry(new Motos::Scene::PlayScene());
+	m_sceneManager->Entry(new Motos::Scene::TitleScene());
+
+	// 最初のシーンの設定
+	m_sceneManager->Start("Motos::Scene::TitleScene");
 }
 
 
@@ -71,7 +82,8 @@ void Game::Initialize()
 //--------------------------------------------------------------------
 void Game::Finalize()
 {
-
+	// スコアマネージャーの削除
+	Motos::Utility::ScoreManager::Reset();
 }
 
 
@@ -86,7 +98,8 @@ void Game::Finalize()
 #pragma region Frame Update
 void Game::Update(const Common::StepTimer & timer)
 {
-
+	// 活動中のシーンを更新する
+	m_sceneManager->UpdateActiveScene(timer);
 }
 #pragma endregion
 
@@ -102,6 +115,7 @@ void Game::Update(const Common::StepTimer & timer)
 #pragma region Frame Render
 void Game::Render()
 {
-
+	// 活動中のシーンを描画する
+	m_sceneManager->RenderActiveScene();
 }
 #pragma endregion

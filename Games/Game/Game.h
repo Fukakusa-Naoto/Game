@@ -16,10 +16,7 @@
 // ヘッダファイルの読み込み =================================================
 // <自作ヘッダーファイル>
 #include "../Library/Framework/Framework.h"
-#include "../../Library/Graphic2D/Sprite.h"
-#include "../../Library/Camera/Camera.h"
-#include "../Library/Sound/SoundManager.h"
-#include "../Library/Graphic3D/Model/Model.h"
+#include "../Library/Scene/SceneManager.h"
 
 
 // クラスの定義 ============================================================
@@ -28,26 +25,17 @@ class Game : public Library::Framework::Framework
 	// <メンバ定数>
 public:
 	// 画面の横幅
-	static const int SCREEN_WIDTH = 800;
-
+	static const int SCREEN_WIDTH;
 	// 画面の高さ
-	static const int SCREEN_HEIGHT = 600;
-
+	static const int SCREEN_HEIGHT;
 	// ゲームタイトル
 	static const std::wstring GAME_TITLE;
 
 
 	// <メンバ変数>
 private:
-	// スプライト
-	Library::Graphic2D::Sprite* m_sprite;
-	// カメラ
-	Library::Camera::Camera* m_camera;
-	// サウンドマネージャ－
-	Library::Sound::SoundManager* m_soundManager;
-	// モデル
-	Library::Graphic3D::Model::Model* m_model;
-	Library::Graphic3D::Model::Model* m_model2;
+	// シーンマネージャー
+	Library::Scene::SceneManager* m_sceneManager;
 
 
 	// <コンストラクタ>
