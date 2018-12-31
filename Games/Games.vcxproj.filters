@@ -389,6 +389,9 @@
     <ClInclude Include="Game\Utility\TaskManager.h">
       <Filter>Game\Utility</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Play\Object\Stage\SkyDome.h">
+      <Filter>Game\Play\Object\Stage</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
@@ -608,6 +611,9 @@
     </ClCompile>
     <ClCompile Include="Game\Utility\TaskManager.cpp">
       <Filter>Game\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Play\Object\Stage\SkyDome.cpp">
+      <Filter>Game\Play\Object\Stage</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

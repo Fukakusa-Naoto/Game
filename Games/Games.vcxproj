@@ -163,6 +163,10 @@
     <ClInclude Include="Game\Play\Controller\TileController.h" />
     <ClInclude Include="Game\Play\Object\Enemy\Enemy.h" />
     <ClInclude Include="Game\Play\Object\Player.h" />
+    <ClInclude Include="Game\Play\Object\Stage\SkyDome.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Game\Play\Object\Stage\Tile.h" />
     <ClInclude Include="Game\Play\Object\UI\Animator.h" />
     <ClInclude Include="Game\Play\Object\UI\AnimeCrip.h" />
@@ -276,6 +280,10 @@
     </ClCompile>
     <ClCompile Include="Game\Play\Object\Player.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../../pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="Game\Play\Object\Stage\SkyDome.cpp">
+      <SubType>
+      </SubType>
     </ClCompile>
     <ClCompile Include="Game\Play\Object\Stage\Tile.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../../../pch.h</PrecompiledHeaderFile>
