@@ -648,6 +648,9 @@
     <None Include="Shader\Header\TileBackground.hlsli">
       <Filter>Shader\Header</Filter>
     </None>
+    <None Include="Shader\Header\SkyDomeHeader.hlsli">
+      <Filter>Shader\Header</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Library\Shader\PixelShader\ModelPixelShader.hlsl">
@@ -694,6 +697,15 @@
     </FxCompile>
     <FxCompile Include="Shader\PixelShader\TilePixelShader.hlsl">
       <Filter>Shader\PixelShader</Filter>
+    </FxCompile>
+    <FxCompile Include="Shader\GeometryShader\SkyDomeGeometryShader.hlsl">
+      <Filter>Shader\GeometryShader</Filter>
+    </FxCompile>
+    <FxCompile Include="Shader\PixelShader\SkyDomePixelShader.hlsl">
+      <Filter>Shader\PixelShader</Filter>
+    </FxCompile>
+    <FxCompile Include="Shader\VertexShader\SkyDomeVertexShader.hlsl">
+      <Filter>Shader\VertexShader</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

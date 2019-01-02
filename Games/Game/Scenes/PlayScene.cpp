@@ -124,6 +124,10 @@ void Motos::Scene::PlayScene::Initialize()
 	collisionManager->SetCollisionGroup(ObjectTag::TILE | ObjectTag::PLAYER, true);
 	collisionManager->SetCollisionGroup(ObjectTag::TILE | ObjectTag::ENEMY, true);
 
+	// スカイドームの作成
+	m_skyDome = new Play::Object::Stage::SkyDome();
+	m_skyDome->Initialize();
+	m_skyDome->SetCamere(m_camera);
 #pragma endregion
 
 #pragma region 演出の初期化
@@ -185,6 +189,10 @@ void Motos::Scene::PlayScene::Finalize()
 	delete m_readyAndGo;
 	m_readyAndGo = nullptr;
 
+	// スカイドームの削除
+	delete m_skyDome;
+	m_skyDome = nullptr;
+
 	// ハイスコアの更新
 	Utility::ScoreManager::GetInstance()->UpdateHighScore();
 }
@@ -200,6 +208,7 @@ void Motos::Scene::PlayScene::Finalize()
 //--------------------------------------------------------------------
 void Motos::Scene::PlayScene::Update(const Common::StepTimer & timer)
 {
+	m_skyDome->Update(timer);
 
 	// カメラの更新
 	m_camera->Update();
@@ -258,6 +267,8 @@ void Motos::Scene::PlayScene::Render()
 
 	// 3Dオブジェクトの描画
 	m_camera->Begin();
+	m_skyDome->Draw();
+
 	// タスクの描画
 	m_taskManager->Draw();
 	m_camera->End();

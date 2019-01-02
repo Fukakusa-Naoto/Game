@@ -68,7 +68,7 @@ void Game::Initialize()
 	m_sceneManager->Entry(new Motos::Scene::TitleScene());
 
 	// 最初のシーンの設定
-	m_sceneManager->Start("Motos::Scene::TitleScene");
+	m_sceneManager->Start("Motos::Scene::PlayScene");
 }
 
 

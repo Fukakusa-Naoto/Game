@@ -25,6 +25,7 @@
 #include "../Utility/EnemyManager.h"
 #include "../../Library/Graphic2D/PrimitiveManager2D.h"
 #include "../Play/Object/UI/ReadyAndGo.h"
+#include "../Play/Object/Stage/SkyDome.h"
 
 
 // 名前空間の定義 ================================================================
@@ -57,6 +58,8 @@ namespace Motos
 			Utility::EnemyManager* m_enemyManager;
 			// プレイヤー
 			Play::Object::Player* m_player;
+			// スカイドーム
+			Play::Object::Stage::SkyDome* m_skyDome;
 
 
 			// --- UI ---
