@@ -17,6 +17,7 @@
 #include "Scenes/PlayScene.h"
 #include "Scenes/TitleScene.h"
 #include "Utility/ScoreManager.h"
+#include "../Library/Sound/SoundManager.h"
 
 
 // usingディレクティブ =====================================================
@@ -60,6 +61,9 @@ Game::Game(HINSTANCE hInstance, int nCmdShow) :
 //--------------------------------------------------------------------
 void Game::Initialize()
 {
+	// サウンドファイルの読み込み
+	Sound::SoundManager::GetInstance()->Initialize(L"Motos.acf");
+
 	// シーンマネージャーのインスタンスの取得
 	m_sceneManager = Scene::SceneManager::GetInstance();
 
@@ -68,7 +72,7 @@ void Game::Initialize()
 	m_sceneManager->Entry(new Motos::Scene::TitleScene());
 
 	// 最初のシーンの設定
-	m_sceneManager->Start("Motos::Scene::PlayScene");
+	m_sceneManager->Start("Motos::Scene::TitleScene");
 }
 
 
