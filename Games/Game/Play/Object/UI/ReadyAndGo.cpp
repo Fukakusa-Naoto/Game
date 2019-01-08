@@ -75,7 +75,7 @@ void Motos::Play::Object::UI::ReadyAndGo::Update(const Common::StepTimer& timer)
 {
 	m_time += static_cast<float>(timer.GetElapsedSeconds());
 
-	if (m_time >= 3.1f)
+	if (m_time >= 1.7f)
 	{
 		m_sprite->SetRect(TEXTURE_RECT[1]);
 		m_animeTime += static_cast<float>(timer.GetElapsedSeconds());
@@ -93,7 +93,7 @@ void Motos::Play::Object::UI::ReadyAndGo::Update(const Common::StepTimer& timer)
 //--------------------------------------------------------------------
 void Motos::Play::Object::UI::ReadyAndGo::Draw()
 {
-	if (m_time <= 4.1f)
+	if (m_time <= 2.7f)
 	{
 		m_sprite->SetColor(Color(1.0f, 1.0f, 1.0f, 1.0f - m_animeTime));
 		m_sprite->SetScale(Vector2::One + Vector2::One*m_animeTime);

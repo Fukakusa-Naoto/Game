@@ -45,7 +45,6 @@ namespace Motos
 				Utility::EnemyManager* m_enemyManager;
 				// 生存フラグ
 				bool m_isActive;
-				bool m_isFalling;
 
 
 				// <コンストラクタ>

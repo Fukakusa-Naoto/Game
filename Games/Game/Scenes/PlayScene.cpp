@@ -21,10 +21,6 @@
 #include "../../Library/Input/KeyboardUtil.h"
 #include "../../Library/Collision/CollisionManager.h"
 #include "../Utility/ObjactTag.h"
-#include "../../Library/Sound/SoundManager.h"
-
-// <リソースファイル>
-#include "../../Resources/Sounds/Play.h"
 
 
 // usingディレクティブ =====================================================
@@ -81,6 +77,7 @@ void Motos::Scene::PlayScene::Initialize()
 
 	// UIキャンバスに登録
 	m_canvas->Entry(m_uiFrame);
+
 #pragma endregion
 
 #pragma region ゲームの初期化
@@ -147,8 +144,6 @@ void Motos::Scene::PlayScene::Initialize()
 
 	m_readyAndGo = new Play::Object::UI::ReadyAndGo(m_camera->GetViewport());
 #pragma endregion
-
-	Sound::SoundManager::GetInstance()->LoadAcb(L"Play.acb", L"Play.awb");
 }
 
 
@@ -200,8 +195,6 @@ void Motos::Scene::PlayScene::Finalize()
 
 	// ハイスコアの更新
 	Utility::ScoreManager::GetInstance()->UpdateHighScore();
-
-	Sound::SoundManager::GetInstance()->Stop();
 }
 
 
@@ -215,8 +208,6 @@ void Motos::Scene::PlayScene::Finalize()
 //--------------------------------------------------------------------
 void Motos::Scene::PlayScene::Update(const Common::StepTimer & timer)
 {
-	static float time = 0.0f;
-
 	m_skyDome->Update(timer);
 
 	// カメラの更新
@@ -229,8 +220,6 @@ void Motos::Scene::PlayScene::Update(const Common::StepTimer & timer)
 	switch (m_sequenceID)
 	{
 	case SequenceID::FADE_IN:
-		if (!Sound::SoundManager::GetInstance()->IsState(CRI_PLAY_STARTSE)) Sound::SoundManager::GetInstance()->Play(CRI_PLAY_STARTSE);
-
 		m_fadeTime -= static_cast<float>(timer.GetElapsedSeconds());
 		if (m_fadeTime <= 0.0f)
 		{
@@ -243,18 +232,9 @@ void Motos::Scene::PlayScene::Update(const Common::StepTimer & timer)
 		m_canvas->Update(timer);
 		m_readyAndGo->Update(timer);
 		// アニメーションの終了
-		if (!m_uiFrame->GetAnimeState()) time += static_cast<float>(timer.GetElapsedSeconds());
-
-		if (time >= 1.7f)
-		{
-			time = 0.0f;
-			m_sequenceID = SequenceID::NORMAL;
-		}
+		if(!m_uiFrame->GetAnimeState()) m_sequenceID = SequenceID::NORMAL;
 		break;
 	case SequenceID::NORMAL:
-		// BGMの再生
-		if (!Sound::SoundManager::GetInstance()->IsState(CRI_PLAY_PLAYBGM)) Sound::SoundManager::GetInstance()->Play(CRI_PLAY_PLAYBGM);
-
 		// タスクの更新
 		m_taskManager->Update(timer);
 		m_readyAndGo->Update(timer);

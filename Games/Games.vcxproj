@@ -261,9 +261,6 @@
     <ClInclude Include="Library\Utility\String.h" />
     <ClInclude Include="Library\Utility\TextureManager.h" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="Resources\Sounds\Motos_acf.h" />
-    <ClInclude Include="Resources\Sounds\Play.h" />
-    <ClInclude Include="Resources\Sounds\Title.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game\Game.cpp">

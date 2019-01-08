@@ -17,10 +17,6 @@
 #include "../Game.h"
 #include "../../Library/Scene/SceneManager.h"
 #include "../../Library/Input/KeyboardUtil.h"
-#include "../../Library/Sound/SoundManager.h"
-
-// <リソースファイル>
-#include "../../Resources/Sounds/Title.h"
 
 
 // usingディレクティブ =====================================================
@@ -96,8 +92,6 @@ void Motos::Scene::TitleScene::Initialize()
 
 	// 2Dのプリミティブ描画マネージャーのインスタンスの取得
 	m_primitiveManager = Graphic2D::PrimitiveManager2D::GetInstance();
-
-	Sound::SoundManager::GetInstance()->LoadAcb(L"Title.acb", L"Title.awb");
 }
 
 
@@ -140,8 +134,6 @@ void Motos::Scene::TitleScene::Finalize()
 //--------------------------------------------------------------------
 void Motos::Scene::TitleScene::Update(const Common::StepTimer & timer)
 {
-	if(!Sound::SoundManager::GetInstance()->IsState(CRI_TITLE_TITLEBGM)) Sound::SoundManager::GetInstance()->Play(CRI_TITLE_TITLEBGM);
-
 	switch (m_sequenceID)
 	{
 	case SequenceID::FADE_IN:
@@ -156,11 +148,7 @@ void Motos::Scene::TitleScene::Update(const Common::StepTimer & timer)
 		// UIの更新
 		m_canvas->Update(timer);
 		// シーンの移動
-		if (Input::KeyboardUtil::GetInstance()->IsTriggered(Keyboard::Keys::Space))
-		{
-			Sound::SoundManager::GetInstance()->Play(CRI_TITLE_TITLESELECT);
-			m_sequenceID = SequenceID::FADE_OUT;
-		}
+		if (Input::KeyboardUtil::GetInstance()->IsTriggered(Keyboard::Keys::Space)) m_sequenceID = SequenceID::FADE_OUT;
 		break;
 	case SequenceID::FADE_OUT:
 		m_fadeTime += static_cast<float>(timer.GetElapsedSeconds());

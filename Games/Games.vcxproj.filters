@@ -143,9 +143,6 @@
     <Filter Include="Game\Utility">
       <UniqueIdentifier>{973a4bfd-384b-4752-8b91-85ec298d0126}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resources\Sounds">
-      <UniqueIdentifier>{3f9b70c5-5969-4d8c-9811-cf751bb6bb06}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -394,15 +391,6 @@
     </ClInclude>
     <ClInclude Include="Game\Play\Object\Stage\SkyDome.h">
       <Filter>Game\Play\Object\Stage</Filter>
-    </ClInclude>
-    <ClInclude Include="Resources\Sounds\Motos_acf.h">
-      <Filter>Resources\Sounds</Filter>
-    </ClInclude>
-    <ClInclude Include="Resources\Sounds\Play.h">
-      <Filter>Resources\Sounds</Filter>
-    </ClInclude>
-    <ClInclude Include="Resources\Sounds\Title.h">
-      <Filter>Resources\Sounds</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

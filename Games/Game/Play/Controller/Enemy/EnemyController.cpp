@@ -19,11 +19,6 @@
 #include "../../../Utility/ObjactTag.h"
 #include "../../../Utility/EnemyManager.h"
 #include "../../../Utility/ScoreManager.h"
-#include "../../../../Library/Sound/SoundManager.h"
-
-// <リソースファイル>
-#include "../../../../Resources/Sounds/Play.h"
-
 
 
 // usingディレクティブ =====================================================
@@ -43,8 +38,7 @@ using namespace Library;
 Motos::Play::Controller::EnemyController::EnemyController(System::GameObject* gameObject, Math::Transform& transform) :
 	ControllerBase(gameObject, transform),
 	m_velocity(Vector3::Zero),
-	m_isActive(true),
-	m_isFalling(false)
+	m_isActive(true)
 {
 	// 何もしない
 }
@@ -121,11 +115,9 @@ void Motos::Play::Controller::EnemyController::OnCollision(Library::Collision::C
 	switch (collider->GetGemaObject()->GetTag())
 	{
 	case ObjectTag::PLAYER:		// プレイヤー
-		Sound::SoundManager::GetInstance()->Play(CRI_PLAY_IMPACT);
 		m_velocity = direction*2.5f;
 		break;
 	case ObjectTag::ENEMY:		// 敵
-		Sound::SoundManager::GetInstance()->Play(CRI_PLAY_IMPACT);
 		m_velocity = direction*1.0f;
 		break;
 	default:
@@ -144,12 +136,6 @@ void Motos::Play::Controller::EnemyController::OnCollision(Library::Collision::C
 //--------------------------------------------------------------------
 void Motos::Play::Controller::EnemyController::Falling()
 {
-	if ((!m_isFalling) && (m_transform.GetPosition().y <= -1.0))
-	{
-		m_isFalling = true;
-		Sound::SoundManager::GetInstance()->Play(CRI_PLAY_FALLING);
-	}
-
 	if (m_transform.GetPosition().y <= -10.0)
 	{
 		m_isActive = false;

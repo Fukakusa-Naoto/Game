@@ -17,10 +17,6 @@
 #include "../../../Game.h"
 #include "../../../../Library/Input/KeyboardUtil.h"
 #include "../../../../Library/Math/Math.h"
-#include "../../../../Library/Sound/SoundManager.h"
-
-// <リソースファイル>
-#include "../../../../Resources/Sounds/Title.h"
 
 
 // usingディレクティブ =====================================================
@@ -73,16 +69,9 @@ void Motos::Title::Object::UI::SelectUI::Update(const Common::StepTimer& timer)
 	Input::KeyboardUtil* keyboard = Input::KeyboardUtil::GetInstance();
 
 	// カーソルの移動
-	if (keyboard->IsTriggered(Keyboard::Keys::Up))
-	{
-		Sound::SoundManager::GetInstance()->Play(CRI_TITLE_TITLECURSOR);
-		--m_nowSelect;
-	}
-	else if (keyboard->IsTriggered(Keyboard::Keys::Down))
-	{
-		Sound::SoundManager::GetInstance()->Play(CRI_TITLE_TITLECURSOR);
-		++m_nowSelect;
-	}
+	if (keyboard->IsTriggered(Keyboard::Keys::Up)) --m_nowSelect;
+	else if (keyboard->IsTriggered(Keyboard::Keys::Down)) ++m_nowSelect;
+
 	// カーソル移動の制限
 	Math::Clamp(m_nowSelect, 0, static_cast<int>(SelectID::SELECT_NUM) - 1);
 }
