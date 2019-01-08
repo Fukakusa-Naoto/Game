@@ -61,6 +61,7 @@ Game::Game(HINSTANCE hInstance, int nCmdShow) :
 //--------------------------------------------------------------------
 void Game::Initialize()
 {
+
 	// サウンドファイルの読み込み
 	Sound::SoundManager::GetInstance()->Initialize(L"Motos.acf");
 
