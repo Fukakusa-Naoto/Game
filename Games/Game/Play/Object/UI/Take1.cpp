@@ -30,7 +30,7 @@ using namespace Library;
 Motos::Play::Object::UI::Take1::Take1(Animator* animator, AnimeTakes* animeTakes, UIParts* uiParts) :
 	AnimeCrip(animator, animeTakes, uiParts)
 {
-	m_endTime = 1.0f;
+	m_endTime = 1.7f;
 }
 
 

@@ -19,6 +19,10 @@
 #include "../../../Library/System/GameObject.h"
 #include "../../Utility/ObjactTag.h"
 #include "../Object/Player.h"
+#include "../../../Library/Sound/SoundManager.h"
+
+// <リソースファイル>
+#include "../../../Resources/Sounds/Play.h"
 
 
 // usingディレクティブ =====================================================
@@ -119,6 +123,8 @@ void Motos::Play::Controller::PlayerController::OnCollision(Library::Collision::
 	// 敵との衝突判定
 	if (collider->GetGemaObject()->GetTag() == ObjectTag::ENEMY)
 	{
+		Sound::SoundManager::GetInstance()->Play(CRI_PLAY_IMPACT);
+
 		// <弾く>
 		// 相手の方向を調べる
 		Vector3 direction = collider->GetTransform().GetPosition() - m_transform.GetPosition();
@@ -148,5 +154,11 @@ void Motos::Play::Controller::PlayerController::OnCollision(Library::Collision::
 //--------------------------------------------------------------------
 void Motos::Play::Controller::PlayerController::Falling()
 {
+	static bool isFalling = false;
+	if ((!isFalling) && (m_transform.GetPosition().y <= -1.0))
+	{
+		isFalling = true;
+		Sound::SoundManager::GetInstance()->Play(CRI_PLAY_FALLING);
+	}
 	if (m_transform.GetPosition().y <= -10.0) m_isActive = false;
 }
