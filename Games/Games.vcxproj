@@ -72,8 +72,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\DirectXTex\DirectXTex;C:\DirectXTK\Inc;C:\Program Files\Autodesk\FBX\FBX SDK\2019.0\include;C:\Cri\pc\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\DirectXTex\DirectXTex\Bin\Desktop_2015\Win32\Debug;C:\Program Files\Autodesk\FBX\FBX SDK\2019.0\lib\vs2015\x86\debug;C:\Cri\pc\libs\x86;C:\DirectXTK\Bin\Desktop_2015\Win32\Debug;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)../Library/DirectXTex/include;$(ProjectDir)../Library/DirectXTK/Inc;$(ProjectDir)../Library/FBX SDK\2019.0\include;$(ProjectDir)../Library/cri/include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)../Library/DirectXTex/Bin/Desktop_2015/Win32/Debug;$(ProjectDir)../Library/FBX SDK/2019.0/lib/vs2015/x86/debug;$(ProjectDir)../Library/cri/libs/x86;$(ProjectDir)../Library/DirectXTK/Bin/Desktop_2015/Win32/Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -94,7 +94,7 @@
       <FloatingPointModel>Fast</FloatingPointModel>
       <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <AdditionalIncludeDirectories>C:\DirectXTex\DDSTextureLoader;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)../Library/DirectXTex/DDSTextureLoader;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

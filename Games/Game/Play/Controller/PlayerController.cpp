@@ -107,6 +107,8 @@ void Motos::Play::Controller::PlayerController::Update(const Common::StepTimer& 
 
 	//　速度のリセット
 	m_velocity = Vector3::Zero;
+
+	m_transform.Update();
 }
 
 

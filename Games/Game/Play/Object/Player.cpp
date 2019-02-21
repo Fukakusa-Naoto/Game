@@ -92,7 +92,6 @@ void Motos::Play::Object::Player::Start()
 void Motos::Play::Object::Player::Update(const Common::StepTimer& timer)
 {
 	m_controller->Update(timer);
-	m_transform.Update();
 }
 
 
