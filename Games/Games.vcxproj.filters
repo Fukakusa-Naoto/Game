@@ -663,6 +663,7 @@
     <None Include="Shader\Header\SkyDomeHeader.hlsli">
       <Filter>Shader\Header</Filter>
     </None>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Library\Shader\PixelShader\ModelPixelShader.hlsl">

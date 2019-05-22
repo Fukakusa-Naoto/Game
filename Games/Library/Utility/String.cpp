@@ -12,6 +12,7 @@
 // <標準ヘッダファイル>
 #include <Windows.h>
 #include <vector>
+#include <stdexcept>
 
 // <自作ヘッダファイル>
 #include "String.h"
