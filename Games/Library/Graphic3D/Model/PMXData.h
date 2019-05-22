@@ -16,6 +16,7 @@
 // <標準ヘッダファイル>
 #include <vector>
 #include <string>
+#include <iostream>
 
 
 // 名前空間の定義 ================================================================
@@ -130,7 +131,7 @@ namespace Library
 
 				// <メンバ関数>
 			public:
-				void Read(std::istream *stream, PMXSetting* setting) override
+				void Read(std::istream* stream, PMXSetting* setting) override
 				{
 					this->boneIndex[0] = ReadIndex(stream, setting->boneIndexSize);
 					this->boneIndex[1] = ReadIndex(stream, setting->boneIndexSize);
@@ -236,7 +237,7 @@ namespace Library
 
 				// <メンバ関数>
 			public:
-				void Read(std::istream *stream, PMXSetting* setting) override
+				void Read(std::istream* stream, PMXSetting* setting) override
 				{
 					this->boneIndex[0] = ReadIndex(stream, setting->boneIndexSize);
 					this->boneIndex[1] = ReadIndex(stream, setting->boneIndexSize);

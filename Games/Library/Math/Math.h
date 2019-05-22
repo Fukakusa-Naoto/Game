@@ -90,9 +90,9 @@ namespace Library
 		inline bool Approximately(float valueA, float valueB, float maxRelDiff = FLT_EPSILON)
 		{
 			// 差を計算する
-			float diff = fabs(valueA - valueB);
-			valueA = fabs(valueA);
-			valueB = fabs(valueB);
+			float diff = static_cast<float>(fabs(static_cast<double>(valueA - valueB)));
+			valueA = static_cast<float>(fabs(static_cast<double>(valueA)));
+			valueB = static_cast<float>(fabs(static_cast<double>(valueB)));
 
 			// 最大のものを見つける
 			float largest = (valueB > valueA) ? valueB : valueA;
@@ -157,19 +157,19 @@ namespace Library
 			{
 				tx = DirectX::XM_PI / 2.0f;
 				ty = 0;
-				tz = atan2(m10, m00);
+				tz = static_cast<float>(atan2(static_cast<double>(m10), static_cast<double>(m00)));
 			}
 			else if (Approximately(m21, -1.0f))
 			{
 				tx = -DirectX::XM_PI / 2.0f;
 				ty = 0;
-				tz = atan2(m10, m00);
+				tz = static_cast<float>(atan2(static_cast<float>(m10), static_cast<float>(m00)));
 			}
 			else
 			{
-				tx = asin(-m21);
-				ty = atan2(m20, m22);
-				tz = atan2(m01, m11);
+				tx = static_cast<float>(asin(static_cast<float>(-m21)));
+				ty = static_cast<float>(atan2(static_cast<float>(m20), static_cast<float>(m22)));
+				tz = static_cast<float>(atan2(static_cast<float>(m01), static_cast<float>(m11)));
 			}
 
 			return DirectX::SimpleMath::Vector3(DirectX::XMConvertToDegrees(tx), DirectX::XMConvertToDegrees(ty), DirectX::XMConvertToDegrees(tz));
@@ -224,7 +224,7 @@ namespace Library
 			}
 
 			float q[4];
-			float v = sqrt(element[biggestIdx]) * 0.5f;
+			float v = static_cast<float>(sqrt(static_cast<float>(element[biggestIdx]))) * 0.5f;
 			q[biggestIdx] = v;
 			float mult = 0.25f / v;
 
