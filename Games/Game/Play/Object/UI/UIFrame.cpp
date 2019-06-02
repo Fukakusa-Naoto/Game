@@ -15,6 +15,7 @@
 // <自作ヘッダーファイル>
 #include "UIFrame.h"
 #include "../../../../Library/Graphic2D/PrimitiveManager2D.h"
+#include "../../../Utility/GameManager.h"
 
 
 // usingディレクティブ =====================================================
@@ -292,6 +293,7 @@ Motos::Play::Object::UI::UIFrame::UIFrame()
 	m_animator = new Animator();
 	m_animeTakes = new AnimeTakes(m_animator, m_uiParts);
 	m_scoreManager = Utility::ScoreManager::GetInstance();
+	m_playerLife = Utility::GameManager::GetInstance()->GetPlayerLife();
 
 	m_animator->ChangeCrip(m_animeTakes->take1);
 	m_animator->Play();
@@ -366,7 +368,7 @@ void Motos::Play::Object::UI::UIFrame::Draw()
 		m_uiStates->round->Draw(11);
 		m_uiParts->remainingLivesTop->Draw();
 		m_uiParts->remainingLivesBottom->Draw();
-		m_uiStates->remainingLives->Draw(1);
+		m_uiStates->remainingLives->Draw(m_playerLife);
 	}
 }
 

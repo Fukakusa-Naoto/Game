@@ -18,6 +18,7 @@
 #include "Scenes/TitleScene.h"
 #include "Utility/ScoreManager.h"
 #include "../Library/Sound/SoundManager.h"
+#include "Utility/GameManager.h"
 
 
 // usingディレクティブ =====================================================
@@ -88,6 +89,8 @@ void Game::Finalize()
 {
 	// スコアマネージャーの削除
 	Motos::Utility::ScoreManager::Reset();
+	// ゲームマネージャーの削除
+	Motos::Utility::GameManager::Reset();
 }
 
 

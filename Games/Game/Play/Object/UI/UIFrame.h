@@ -173,7 +173,7 @@ namespace Motos
 					Animator* m_animator;
 					AnimeTakes* m_animeTakes;
 					Utility::ScoreManager* m_scoreManager;
-
+					int m_playerLife;
 
 					// <コンストラクタ>
 				public:

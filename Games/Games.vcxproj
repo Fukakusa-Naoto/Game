@@ -200,6 +200,7 @@
     <ClInclude Include="Game\Title\Object\UI\TileBackground.h" />
     <ClInclude Include="Game\Title\Object\UI\Title.h" />
     <ClInclude Include="Game\Utility\EnemyManager.h" />
+    <ClInclude Include="Game\Utility\GameManager.h" />
     <ClInclude Include="Game\Utility\ObjactTag.h" />
     <ClInclude Include="Game\Utility\ScoreManager.h" />
     <ClInclude Include="Game\Utility\StageManager.h" />
@@ -415,6 +416,10 @@
     <ClCompile Include="Game\Utility\EnemyManager.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">../../pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="Game\Utility\GameManager.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Game\Utility\ScoreManager.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>

@@ -31,6 +31,13 @@
 // 名前空間の定義 ================================================================
 namespace Motos
 {
+	namespace Utility
+	{
+		// クラスの宣言 ==========================================================
+		class GameManager;
+	}
+
+
 	namespace Scene
 	{
 		// クラスの定義 ==========================================================
@@ -60,6 +67,8 @@ namespace Motos
 			Play::Object::Player* m_player;
 			// スカイドーム
 			Play::Object::Stage::SkyDome* m_skyDome;
+			// ゲームマネージャー
+			Utility::GameManager* m_gameManager;
 
 
 			// --- UI ---
@@ -91,6 +100,7 @@ namespace Motos
 
 
 			// <デストラクタ>
+		public:
 			~PlayScene();
 
 

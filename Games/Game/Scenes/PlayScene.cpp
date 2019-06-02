@@ -22,6 +22,7 @@
 #include "../../Library/Collision/CollisionManager.h"
 #include "../Utility/ObjactTag.h"
 #include "../../Library/Sound/SoundManager.h"
+#include "../Utility/GameManager.h"
 
 // <リソースファイル>
 #include "../../Resources/Sounds/Play.h"
@@ -41,7 +42,8 @@ using namespace Library;
 //! @parameter [void] なし
 //--------------------------------------------------------------------
 Motos::Scene::PlayScene::PlayScene() :
-	m_canvas(nullptr)
+	m_canvas(nullptr),
+	m_gameManager(nullptr)
 {
 	// 何もしない
 }
@@ -149,6 +151,9 @@ void Motos::Scene::PlayScene::Initialize()
 #pragma endregion
 
 	Sound::SoundManager::GetInstance()->LoadAcb(L"Play.acb", L"Play.awb");
+
+	// ゲームマネージャーのインスタンスの取得
+	m_gameManager = Utility::GameManager::GetInstance();
 }
 
 
@@ -259,12 +264,24 @@ void Motos::Scene::PlayScene::Update(const Common::StepTimer & timer)
 		m_taskManager->Update(timer);
 		m_readyAndGo->Update(timer);
 		// シーンの移動
-		if ((!m_player->GetActive()) || (m_enemyManager->GetEnemyCount() == 0)) m_sequenceID = SequenceID::FADE_OUT;
+		if (!m_player->GetActive())
+		{
+			m_gameManager->SubPlayerLife();
+			m_sequenceID = SequenceID::FADE_OUT;
+		}
+		else if (m_enemyManager->GetEnemyCount() == 0)
+		{
+			m_sequenceID = SequenceID::FADE_OUT;
+		}
 		break;
 	case SequenceID::FADE_OUT:
 		m_fadeTime += static_cast<float>(timer.GetElapsedSeconds());
 		// シーン遷移
-		if (m_fadeTime >= 1.0f) Library::Scene::SceneManager::GetInstance()->LoadScene("Motos::Scene::TitleScene");
+		if (m_fadeTime >= 1.0f)
+		{
+			if (m_gameManager->GetPlayerLife() == 0) Library::Scene::SceneManager::GetInstance()->LoadScene("Motos::Scene::TitleScene");
+			else Library::Scene::SceneManager::GetInstance()->LoadScene("Motos::Scene::PlayScene");
+		}
 		break;
 	default:
 		break;

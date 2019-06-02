@@ -84,7 +84,6 @@ void Motos::Play::Object::UI::RemainingLives::Draw(int count)
 {
 	Math::Clamp(count, 1, MAX_DIGIT_COUNT);
 
-	// 9桁分表示する
 	for (int i = 0; i < count; ++i)
 	{
 		// 座標の設定

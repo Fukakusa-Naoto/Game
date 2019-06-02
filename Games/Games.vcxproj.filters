@@ -404,6 +404,9 @@
     <ClInclude Include="Resources\Sounds\Title.h">
       <Filter>Resources\Sounds</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Utility\GameManager.h">
+      <Filter>Game\Utility</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
@@ -626,6 +629,9 @@
     </ClCompile>
     <ClCompile Include="Game\Play\Object\Stage\SkyDome.cpp">
       <Filter>Game\Play\Object\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Utility\GameManager.cpp">
+      <Filter>Game\Utility</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

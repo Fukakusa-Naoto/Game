@@ -18,6 +18,7 @@
 #include "../../Library/Scene/SceneManager.h"
 #include "../../Library/Input/KeyboardUtil.h"
 #include "../../Library/Sound/SoundManager.h"
+#include "..//Utility/GameManager.h"
 
 // <リソースファイル>
 #include "../../Resources/Sounds/Title.h"
@@ -169,6 +170,8 @@ void Motos::Scene::TitleScene::Update(const Common::StepTimer & timer)
 			switch (m_selectUI->GetSelectState())
 			{
 			case  Title::Object::UI::SelectUI::SelectID::START_GAME:
+				// プレイヤーの残機を初期化
+				Utility::GameManager::GetInstance()->SetPlayerLife(3);
 				Library::Scene::SceneManager::GetInstance()->LoadScene("Motos::Scene::PlayScene");
 				break;
 			case Title::Object::UI::SelectUI::SelectID::EXIT:
