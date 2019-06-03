@@ -294,6 +294,7 @@ Motos::Play::Object::UI::UIFrame::UIFrame()
 	m_animeTakes = new AnimeTakes(m_animator, m_uiParts);
 	m_scoreManager = Utility::ScoreManager::GetInstance();
 	m_playerLife = Utility::GameManager::GetInstance()->GetPlayerLife();
+	m_stageNumber = Utility::GameManager::GetInstance()->GetStageNumber();
 
 	m_animator->ChangeCrip(m_animeTakes->take1);
 	m_animator->Play();
@@ -365,7 +366,7 @@ void Motos::Play::Object::UI::UIFrame::Draw()
 		m_uiParts->itemBackgroundParts->Draw();
 		m_uiParts->topParts->Draw();
 		m_uiParts->smallScreenParts->Draw();
-		m_uiStates->round->Draw(11);
+		m_uiStates->round->Draw(m_stageNumber);
 		m_uiParts->remainingLivesTop->Draw();
 		m_uiParts->remainingLivesBottom->Draw();
 		m_uiStates->remainingLives->Draw(m_playerLife);

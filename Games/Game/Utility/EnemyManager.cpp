@@ -16,6 +16,7 @@
 #include "EnemyManager.h"
 #include "TaskManager.h"
 #include "../Play/Object/Enemy/Enemy.h"
+#include "../Play/Object/Stage/Tile.h"
 
 
 // usingディレクティブ =====================================================
@@ -62,37 +63,40 @@ Motos::Utility::EnemyManager::~EnemyManager()
 //--------------------------------------------------------------------
 //! @summary   敵の作成処理
 //!
+//! @parameter [objectData] オブジェクトデータ
 //! @parameter [camera] カメラ
 //! @parameter [taskManager] タスクマネージャー
 //! @parameter [target] ターゲットの情報
 //!
 //! @return    なし
 //--------------------------------------------------------------------
-void Motos::Utility::EnemyManager::Create(Library::Camera::Camera* camera, TaskManager* taskManager, System::GameObject* target)
+void Motos::Utility::EnemyManager::Create(vector<int>& objectData, Library::Camera::Camera* camera, TaskManager* taskManager, System::GameObject* target)
 {
-	Play::Object::Enemy::Enemy* enemy = new Play::Object::Enemy::Enemy();
-	enemy->SetCamera(camera);
-	enemy->SetTartet(target);
-	enemy->SetEnemyManager(this);
+	for (unsigned int i = 0; i < objectData.size(); ++i)
+	{
+		switch (objectData[i])
+		{
+		case 2:
+		{
+			Play::Object::Enemy::Enemy* enemy = new Play::Object::Enemy::Enemy();
+			enemy->SetCamera(camera);
+			enemy->SetTartet(target);
+			enemy->SetEnemyManager(this);
 
-	enemy->SetPosition(Vector3(5.0f, 0.5f, -5.0f));
+			float x = static_cast<float>(i % 12) - 6.0f;
+			float z = static_cast<float>(i / 12) - 6.0f;
+			enemy->SetPosition(Vector3(x, 0.5f, z));
 
-	taskManager->Entry(enemy);
-	m_enemyList.push_back(enemy);
+			taskManager->Entry(enemy);
+			m_enemyList.push_back(enemy);
 
-	++m_enemyCount;
-
-	enemy = new Play::Object::Enemy::Enemy();
-	enemy->SetCamera(camera);
-	enemy->SetTartet(target);
-	enemy->SetEnemyManager(this);
-
-	enemy->SetPosition(Vector3(-5.0f, 0.5f, -5.0f));
-
-	taskManager->Entry(enemy);
-	m_enemyList.push_back(enemy);
-
-	++m_enemyCount;
+			++m_enemyCount;
+		}
+		break;
+		default:
+			break;
+		}
+	}
 }
 
 

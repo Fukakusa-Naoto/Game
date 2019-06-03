@@ -174,6 +174,7 @@ namespace Motos
 					AnimeTakes* m_animeTakes;
 					Utility::ScoreManager* m_scoreManager;
 					int m_playerLife;
+					int m_stageNumber;
 
 					// <コンストラクタ>
 				public:

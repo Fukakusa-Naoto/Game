@@ -21,7 +21,8 @@
 //! @parameter [void] なし
 //--------------------------------------------------------------------
 Motos::Utility::GameManager::GameManager() :
-	m_playerLife(0)
+	m_playerLife(0),
+	m_stageNumber(11)
 {
 	// 何もしない
 }
@@ -63,4 +64,18 @@ void Motos::Utility::GameManager::AddPlayerLife()
 void Motos::Utility::GameManager::SubPlayerLife()
 {
 	--m_playerLife;
+}
+
+
+
+//----------------------------------------------------------
+//! @summary   ステージを進める
+//!
+//! @parameter [void] なし
+//!
+//! @return    なし
+//----------------------------------------------------------
+void Motos::Utility::GameManager::UpStageNumber()
+{
+	m_stageNumber += (m_stageNumber % 10 == 5) ? 6 : 1;
 }

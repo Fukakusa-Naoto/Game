@@ -28,9 +28,9 @@ namespace Library
 		{
 			// <変数>
 			// データ
-			std::unique_ptr<char[]> data;
+			std::unique_ptr<char[]> data = nullptr;
 			// サイズ
-			unsigned int size;
+			unsigned int size = 0;
 
 
 			// <ゲッター関数>

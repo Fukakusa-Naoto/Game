@@ -34,6 +34,8 @@ namespace Motos
 		private:
 			// プレイヤーの残機
 			int m_playerLife;
+			// 現在のステージ
+			int m_stageNumber;
 
 
 			// <コンストラクタ>
@@ -68,14 +70,25 @@ namespace Motos
 			void SubPlayerLife();
 
 
+			//----------------------------------------------------------
+			//! @summary   ステージを進める
+			//!
+			//! @parameter [void] なし
+			//!
+			//! @return    なし
+			//----------------------------------------------------------
+			void UpStageNumber();
+
+
 			// <セッター関数>
 		public:
-			void SetPlayerLife(int playerLife) { m_playerLife = playerLife; }
+			inline void SetPlayerLife(int playerLife) { m_playerLife = playerLife; }
 
 
 			// <ゲッター関数>
 		public:
-			int GetPlayerLife()const { return m_playerLife; }
+			inline int GetPlayerLife() const { return m_playerLife; }
+			inline int GetStageNumber() const { return m_stageNumber; }
 		};
 	}
 }

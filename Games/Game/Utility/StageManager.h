@@ -16,6 +16,7 @@
 // ヘッダファイルの読み込み =======================================================
 // <標準ヘッダファイル>
 #include <list>
+#include <vector>
 
 // <自作ヘッダファイル>
 #include "../../Library/Camera/Camera.h"
@@ -71,12 +72,25 @@ namespace Motos
 			//--------------------------------------------------------------
 			//! @summary   ステージの作成処理
 			//!
+			//! @parameter [stageData] ステージデータ
 			//! @parameter [camera] カメラ
 			//! @parameter [taskManager] タスクマネージャー
 			//!
 			//! @return    なし
 			//--------------------------------------------------------------
-			void Create(Library::Camera::Camera* camera, TaskManager* taskManager);
+			void Create(std::vector<int>& stageData, Library::Camera::Camera* camera, TaskManager* taskManager);
+
+
+			//--------------------------------------------------------------
+			//! @summary   ステージデータの読み込み
+			//!
+			//! @parameter [stageNumber] 読み込むステージデータ
+			//! @parameter [stageData] ステージデータ
+			//! @parameter [objectData] オブジェクトデータ
+			//!
+			//! @return    なし
+			//--------------------------------------------------------------
+			void LoadStageData(int stageNumber, std::vector<int>& stageData, std::vector<int>& objectData);
 		};
 	}
 }

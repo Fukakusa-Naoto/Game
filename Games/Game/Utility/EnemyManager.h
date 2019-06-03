@@ -73,13 +73,14 @@ namespace Motos
 			//--------------------------------------------------------------
 			//! @summary   敵の作成処理
 			//!
+			//! @parameter [objectData] オブジェクトデータ
 			//! @parameter [camera] カメラ
 			//! @parameter [taskManager] タスクマネージャー
 			//! @parameter [target] ターゲットの情報
 			//!
 			//! @return    なし
 			//--------------------------------------------------------------
-			void Create(Library::Camera::Camera* camera, TaskManager* taskManager, Library::System::GameObject* target);
+			void Create(std::vector<int>& objectData, Library::Camera::Camera* camera, TaskManager* taskManager, Library::System::GameObject* target);
 
 
 			//--------------------------------------------------------------

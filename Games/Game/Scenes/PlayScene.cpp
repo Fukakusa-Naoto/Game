@@ -23,6 +23,7 @@
 #include "../Utility/ObjactTag.h"
 #include "../../Library/Sound/SoundManager.h"
 #include "../Utility/GameManager.h"
+#include "../Play/Object/Stage/Tile.h"
 
 // <リソースファイル>
 #include "../../Resources/Sounds/Play.h"
@@ -42,8 +43,20 @@ using namespace Library;
 //! @parameter [void] なし
 //--------------------------------------------------------------------
 Motos::Scene::PlayScene::PlayScene() :
+	m_camera(nullptr),
+	m_taskManager(nullptr),
+	m_stageManager(nullptr),
+	m_enemyManager(nullptr),
+	m_player(nullptr),
+	m_skyDome(nullptr),
+	m_gameManager(nullptr),
 	m_canvas(nullptr),
-	m_gameManager(nullptr)
+	m_uiFrame(nullptr),
+	m_readyAndGo(nullptr),
+	m_sequenceID(SequenceID::FADE_IN),
+	m_fadeTime(0.0f),
+	m_primitiveManager(nullptr),
+	m_screenViewport(D3D11_VIEWPORT())
 {
 	// 何もしない
 }
@@ -71,6 +84,9 @@ Motos::Scene::PlayScene::~PlayScene()
 //--------------------------------------------------------------------
 void Motos::Scene::PlayScene::Initialize()
 {
+	// ゲームマネージャーのインスタンスの取得
+	m_gameManager = Utility::GameManager::GetInstance();
+
 #pragma region UIの初期化
 	// UIキャンバスの作成
 	m_canvas = new Graphic2D::UI::Canvas();
@@ -102,8 +118,13 @@ void Motos::Scene::PlayScene::Initialize()
 	// ステージマネージャーの作成
 	m_stageManager = new Utility::StageManager();
 
+	// ステージデータの読み込み
+	vector<int> stageData;
+	vector<int> objectData;
+	m_stageManager->LoadStageData(m_gameManager->GetStageNumber(), stageData, objectData);
+
 	// ステージの作成
-	m_stageManager->Create(m_camera, m_taskManager);
+	m_stageManager->Create(stageData, m_camera, m_taskManager);
 
 	// プレイヤーの作成
 	m_player = new Play::Object::Player();
@@ -112,12 +133,23 @@ void Motos::Scene::PlayScene::Initialize()
 	// プレイヤーをタスクマネージャーに登録
 	m_taskManager->Entry(m_player);
 
+	for (unsigned int i = 0; i < objectData.size(); ++i)
+	{
+		if (objectData[i] == 1)
+		{
+			float x = static_cast<float>(i % 12) - 6.0f;
+			float z = static_cast<float>(i / 12) - 6.0f;
+			m_player->GetTransform().SetPosition(Vector3(x, 0.5f, z));
+			break;
+		}
+	}
+
 
 	// エネミーマネージャーの作成
 	m_enemyManager = new Utility::EnemyManager();
 
 	// 敵の生成
-	m_enemyManager->Create(m_camera, m_taskManager, m_player);
+	m_enemyManager->Create(objectData, m_camera, m_taskManager, m_player);
 
 
 	// 衝突判定のマスク設定
@@ -151,9 +183,6 @@ void Motos::Scene::PlayScene::Initialize()
 #pragma endregion
 
 	Sound::SoundManager::GetInstance()->LoadAcb(L"Play.acb", L"Play.awb");
-
-	// ゲームマネージャーのインスタンスの取得
-	m_gameManager = Utility::GameManager::GetInstance();
 }
 
 
@@ -271,6 +300,7 @@ void Motos::Scene::PlayScene::Update(const Common::StepTimer & timer)
 		}
 		else if (m_enemyManager->GetEnemyCount() == 0)
 		{
+			m_gameManager->UpStageNumber();
 			m_sequenceID = SequenceID::FADE_OUT;
 		}
 		break;
@@ -279,8 +309,8 @@ void Motos::Scene::PlayScene::Update(const Common::StepTimer & timer)
 		// シーン遷移
 		if (m_fadeTime >= 1.0f)
 		{
-			if (m_gameManager->GetPlayerLife() == 0) Library::Scene::SceneManager::GetInstance()->LoadScene("Motos::Scene::TitleScene");
-			else Library::Scene::SceneManager::GetInstance()->LoadScene("Motos::Scene::PlayScene");
+			if ((m_gameManager->GetPlayerLife() == 0) || (m_gameManager->GetStageNumber() == 23)) Library::Scene::SceneManager::GetInstance()->LoadScene("Motos::Scene::TitleScene");
+			else if (m_gameManager->GetStageNumber() < 22)Library::Scene::SceneManager::GetInstance()->LoadScene("Motos::Scene::PlayScene");
 		}
 		break;
 	default:

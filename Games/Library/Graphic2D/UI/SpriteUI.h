@@ -40,7 +40,12 @@ namespace Library
 
 				// <コンストラクタ>
 			public:
-				SpriteUI() : m_drawingOrder(0) {}
+				SpriteUI() :
+					m_viewport(D3D11_VIEWPORT()),
+					m_drawingOrder(0)
+				{
+					// 何もしない
+				}
 
 
 				// <メンバ関数>

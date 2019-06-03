@@ -33,7 +33,10 @@ using namespace Library;
 //! @parameter [void] なし
 //--------------------------------------------------------------------
 Motos::Play::Object::Player::Player() :
-	GameObject()
+	GameObject(),
+	m_primitiveRender(nullptr),
+	m_sphereShape(nullptr),
+	m_rigidBody(nullptr)
 {
 	// 何もしない
 }

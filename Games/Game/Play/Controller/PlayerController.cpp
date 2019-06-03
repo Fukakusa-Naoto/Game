@@ -42,6 +42,7 @@ using namespace Library;
 Motos::Play::Controller::PlayerController::PlayerController(System::GameObject* gameObject, Math::Transform& transform) :
 	ControllerBase(gameObject, transform),
 	m_velocity(Vector3::Zero),
+	m_rigidBody(nullptr),
 	m_isActive(true)
 {
 	m_transform.SetPosition(Vector3(0.0f, 0.5f, 5.0f));

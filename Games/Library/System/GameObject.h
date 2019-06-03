@@ -111,7 +111,7 @@ namespace Library
 			//--------------------------------------------------------------
 			//! @summary   座標変換コンポーネントの取得
 			//--------------------------------------------------------------
-			inline const Math::Transform& GetTransform() const { return m_transform; }
+			inline Math::Transform& GetTransform() { return m_transform; }
 		};
 	}
 }

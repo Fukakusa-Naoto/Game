@@ -32,7 +32,7 @@ namespace Library
 		class Transform
 		{
 			// <メンバ変数>
-		public:
+		private:
 			DirectX::SimpleMath::Matrix m_world;
 			DirectX::SimpleMath::Vector3 m_position;
 			DirectX::SimpleMath::Vector3 m_eulerAngles;

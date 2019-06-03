@@ -44,7 +44,13 @@ namespace Library
 
 
 				// <コンストラクタ>
-				VertexBuffer() {}
+				VertexBuffer() :
+					position(0.0f, 0.0f, 0.0f),
+					color(0.0f, 0.0f, 0.0f, 0.0f)
+				{
+					// 何もしない
+				}
+
 				VertexBuffer(DirectX::XMFLOAT3 position, DirectX::XMFLOAT4 color) :
 					position(position),
 					color(color)

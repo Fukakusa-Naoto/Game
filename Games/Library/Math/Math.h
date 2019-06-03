@@ -90,7 +90,7 @@ namespace Library
 		inline bool Approximately(float valueA, float valueB, float maxRelDiff = FLT_EPSILON)
 		{
 			// 差を計算する
-			float diff = static_cast<float>(fabs(static_cast<double>(valueA - valueB)));
+			float diff = static_cast<float>(fabs(static_cast<double>(valueA) - static_cast<double>(valueB)));
 			valueA = static_cast<float>(fabs(static_cast<double>(valueA)));
 			valueB = static_cast<float>(fabs(static_cast<double>(valueB)));
 
