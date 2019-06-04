@@ -310,7 +310,7 @@ void Motos::Scene::PlayScene::Update(const Common::StepTimer & timer)
 		if (m_fadeTime >= 1.0f)
 		{
 			if ((m_gameManager->GetPlayerLife() == 0) || (m_gameManager->GetStageNumber() == 23)) Library::Scene::SceneManager::GetInstance()->LoadScene("Motos::Scene::TitleScene");
-			else if (m_gameManager->GetStageNumber() < 22)Library::Scene::SceneManager::GetInstance()->LoadScene("Motos::Scene::PlayScene");
+			else if (m_gameManager->GetStageNumber() <= 22) Library::Scene::SceneManager::GetInstance()->LoadScene("Motos::Scene::PlayScene");
 		}
 		break;
 	default:

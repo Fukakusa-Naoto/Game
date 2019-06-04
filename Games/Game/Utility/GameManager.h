@@ -80,6 +80,16 @@ namespace Motos
 			void UpStageNumber();
 
 
+			//----------------------------------------------------------
+			//! @summary   ステージをリセットする
+			//!
+			//! @parameter [void] なし
+			//!
+			//! @return    なし
+			//----------------------------------------------------------
+			void ResetStageNumber();
+
+
 			// <セッター関数>
 		public:
 			inline void SetPlayerLife(int playerLife) { m_playerLife = playerLife; }

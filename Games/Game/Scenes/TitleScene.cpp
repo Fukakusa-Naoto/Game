@@ -42,7 +42,10 @@ Motos::Scene::TitleScene::TitleScene() :
 	m_title(nullptr),
 	m_baseBackground(nullptr),
 	m_tileBackground(nullptr),
-	m_selectUI(nullptr)
+	m_selectUI(nullptr),
+	m_sequenceID(SequenceID::FADE_IN),
+	m_fadeTime(0.0f),
+	m_primitiveManager(nullptr)
 {
 	// 何もしない
 }
@@ -170,6 +173,8 @@ void Motos::Scene::TitleScene::Update(const Common::StepTimer & timer)
 			switch (m_selectUI->GetSelectState())
 			{
 			case  Title::Object::UI::SelectUI::SelectID::START_GAME:
+				// ステージを初期化
+				Utility::GameManager::GetInstance()->ResetStageNumber();
 				// プレイヤーの残機を初期化
 				Utility::GameManager::GetInstance()->SetPlayerLife(3);
 				Library::Scene::SceneManager::GetInstance()->LoadScene("Motos::Scene::PlayScene");

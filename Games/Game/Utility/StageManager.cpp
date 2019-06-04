@@ -83,8 +83,8 @@ void Motos::Utility::StageManager::Create(vector<int>& stageData, Library::Camer
 			Play::Object::Stage::Tile* tile = new Play::Object::Stage::Tile();
 			tile->SetCamera(camera);
 
-			float x = 5.0f - static_cast<float>(i % 12) * Play::Object::Stage::Tile::TILE_SIZE.x + Play::Object::Stage::Tile::TILE_SIZE.x * 0.5f;
-			float z = 5.0f - static_cast<float>(i / 12) * Play::Object::Stage::Tile::TILE_SIZE.z + Play::Object::Stage::Tile::TILE_SIZE.z * 0.5f;
+			float x = static_cast<float>(i % 12) - 6.0f;
+			float z = static_cast<float>(i / 12) - 6.0f;
 			tile->SetPosition(Vector3(x, 0.0f, z));
 
 			taskManager->Entry(tile);
