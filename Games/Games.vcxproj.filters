@@ -726,5 +726,8 @@
     <FxCompile Include="Shader\VertexShader\SkyDomeVertexShader.hlsl">
       <Filter>Shader\VertexShader</Filter>
     </FxCompile>
+    <FxCompile Include="Shader\PixelShader\LightingPixelShader.hlsl">
+      <Filter>Shader\PixelShader</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

@@ -40,7 +40,15 @@ const Vector3 Motos::Play::Object::Stage::Tile::TILE_SIZE = Vector3(1.0f, 0.1f, 
 //! @parameter [void] なし
 //--------------------------------------------------------------------
 Motos::Play::Object::Stage::Tile::Tile() :
-	GameObject()
+	GameObject(),
+	m_primitiveRender(nullptr),
+	m_device(nullptr),
+	m_deviceContext(nullptr),
+	m_commonStates(nullptr),
+	m_vertexShader(nullptr),
+	m_geometryShader(nullptr),
+	m_pixelShader(nullptr),
+	m_cubeShape(nullptr)
 {
 	// 何もしない
 }

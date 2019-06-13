@@ -47,7 +47,17 @@ Graphic3D::PrimitiveManager3D::PrimitiveManager3D() :
 	m_deviceContext(nullptr),
 	m_commonStates(nullptr),
 	m_vertexShader(nullptr),
-	m_pixelShader(nullptr)
+	m_vertexShader2(nullptr),
+	m_geometryShader(nullptr),
+	m_pixelShader(nullptr),
+	m_constBuffer(nullptr),
+	m_vertexBuffer(nullptr),
+	m_indexBuffer(nullptr),
+	m_cubeVertexBuffer(nullptr),
+	m_cubeIndexBuffer(nullptr),
+	m_cubeWireframeIndexBuffer(nullptr),
+	m_sphereVertexBuffer(nullptr),
+	m_sphereIndexBuffer(nullptr)
 {
 	// 何もしない
 }
@@ -1181,6 +1191,102 @@ void Graphic3D::PrimitiveManager3D::DrawSphere(const Vector3& position, float ra
 	// シェーダーをセット
 	// ピクセルシェーダー
 	m_deviceContext->PSSetShader(m_pixelShader, nullptr, 0);
+
+
+	// 描画
+	m_deviceContext->DrawIndexed(930, 0, 0);
+
+	m_deviceContext->GSSetShader(nullptr, nullptr, 0);
+}
+
+
+
+//----------------------------------------------------------------------
+//! @summary   球の描画
+//!
+//! @parameter [position] 中心座標
+//! @parameter [radius] 半径
+//! @parameter [color] 色
+//! @parameter [view] ビュー行列
+//! @parameter [projection] 射影行列
+//! @parameter [lambda] レンダリング・パイプライン構築のラムダ式関数
+//!
+//! @return    なし
+//----------------------------------------------------------------------
+void Graphic3D::PrimitiveManager3D::DrawSphere(const Vector3& position, float radius, const XMFLOAT4& color, const Matrix& view, const Matrix& projection, function<void()> lambda)
+{
+	// 頂点データの色情報の更新
+	for (vector<VertexBuffer>::iterator itr = m_sphereVertexData.begin(); itr != m_sphereVertexData.end(); ++itr)
+	{
+		(*itr).color = color;
+	}
+
+	// 定数バッファの作成
+	ConstBuffer constBufferData;
+	constBufferData.view = view.Transpose();
+	constBufferData.projection = projection.Transpose();
+	Matrix world = Matrix::CreateScale(radius) * Matrix::CreateTranslation(position);
+	constBufferData.world = world.Transpose();
+
+	// 頂点バッファの更新
+	D3D11_MAPPED_SUBRESOURCE msr;
+	m_deviceContext->Map(m_sphereVertexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &msr);
+	memcpy(msr.pData, m_sphereVertexData.data(), sizeof(VertexBuffer) * m_sphereVertexData.size()); // 頂点分コピー
+	m_deviceContext->Unmap(m_sphereVertexBuffer, 0);
+
+
+	// 頂点バッファをセット
+	UINT stride = sizeof(VertexBuffer);
+	UINT offset = 0;
+	m_deviceContext->IASetVertexBuffers(0, 1, &m_sphereVertexBuffer, &stride, &offset);
+
+
+	// インデックスバッファをセット
+	m_deviceContext->IASetIndexBuffer(m_sphereIndexBuffer, DXGI_FORMAT_R32_UINT, 0);
+
+
+	//定数バッファの内容更新
+	m_deviceContext->UpdateSubresource(m_constBuffer, 0, NULL, &constBufferData, 0, 0);
+
+
+	// 頂点シェーダーに値を渡す
+	m_deviceContext->VSSetConstantBuffers(0, 1, &m_constBuffer);
+
+	// ジオメトリシェーダーに値を渡す
+	m_deviceContext->GSSetConstantBuffers(0, 1, &m_constBuffer);
+
+
+	// ラスタライザステートの設定
+	m_deviceContext->RSSetState(m_commonStates->CullCounterClockwise());		// 反時計回りの面をカリングする
+
+	// シェーダーをセット
+	// 頂点シェーダー
+	m_deviceContext->VSSetShader(m_vertexShader2->vertexShader, nullptr, 0);
+	// ジオメトリシェーダー
+	m_deviceContext->GSSetShader(m_geometryShader, nullptr, 0);
+
+	// 入力レイアウトをセット
+	m_deviceContext->IASetInputLayout(m_vertexShader2->inputLayout);
+
+	// 深度・ステンシルステートの設定
+	m_deviceContext->OMSetDepthStencilState(m_commonStates->DepthDefault(), 0);	// 深度テストをするが、書き込みをしない・ステンシルテストをしない
+
+
+	// ブレンドステートの設定
+	ID3D11BlendState* blendstate = m_commonStates->NonPremultiplied();			// 半透明合成（アルファ未乗算）
+	m_deviceContext->OMSetBlendState(blendstate, nullptr, 0xFFFFFFFF);
+
+
+	// プリミティブの種類を設定
+	m_deviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);	// 三角形ストリップ
+
+
+	// シェーダーをセット
+	// ピクセルシェーダー
+	m_deviceContext->PSSetShader(m_pixelShader, nullptr, 0);
+
+
+	lambda();
 
 
 	// 描画

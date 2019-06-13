@@ -17,6 +17,7 @@
 #include "../../../../Library/Collision/CollisionManager.h"
 #include "../../../Utility/ObjactTag.h"
 #include "../../../../Library/Collision/SphereShape.h"
+#include "../../../../Library/Common/DeviceResources.h"
 
 
 // usingディレクティブ =====================================================
@@ -33,7 +34,13 @@ using namespace Library;
 //! @parameter [void] なし
 //--------------------------------------------------------------------
 Motos::Play::Object::Enemy::Enemy::Enemy() :
-	GameObject()
+	GameObject(),
+	m_primitiveRender(nullptr),
+	m_sphereShape(nullptr),
+	m_rigidBody(nullptr),
+	m_enemyManager(nullptr),
+	m_deviceContext(nullptr),
+	m_pixelShader(nullptr)
 {
 	m_controller = new Controller::EnemyController(this, m_transform);
 }
@@ -65,6 +72,7 @@ Motos::Play::Object::Enemy::Enemy::~Enemy()
 //--------------------------------------------------------------------
 void Motos::Play::Object::Enemy::Enemy::Start()
 {
+	m_deviceContext = Common::DeviceResources::GetInstance()->GetD3DDeviceContext();
 	m_primitiveRender = Graphic3D::PrimitiveManager3D::GetInstance();
 
 	m_sphereShape = new Collision::SphereShape(m_controller, m_transform, 0.5f);
@@ -78,6 +86,9 @@ void Motos::Play::Object::Enemy::Enemy::Start()
 	m_tag = ObjectTag::ENEMY;
 
 	dynamic_cast<Controller::EnemyController*>(m_controller)->SetEnemyManager(m_enemyManager);
+
+	// ピクセルシェーダーのインスタンスの取得
+	m_pixelShader = Shader::ShaderManager::GetInstance()->LoadPixelShader(L"LightingPixelShader");
 }
 
 
@@ -106,5 +117,18 @@ void Motos::Play::Object::Enemy::Enemy::Update(const Common::StepTimer& timer)
 //--------------------------------------------------------------------
 void Motos::Play::Object::Enemy::Enemy::Draw()
 {
-	m_primitiveRender->DrawSphere(m_transform.GetPosition(), 0.5f, Color(1.0f, 0.0f, 0.0f, 1.0f), m_camera->GetViewMatrix(), m_camera->GetProjectionMatrix());
+	// パイプライン構築のラムダ式関数
+	function<void()> lambda = [&]()
+	{
+		// ピクセルシェーダー
+		m_deviceContext->PSSetShader(m_pixelShader, nullptr, 0);
+	};
+
+	m_primitiveRender->DrawSphere(
+		m_transform.GetPosition(),
+		0.5f,
+		Color(1.0f, 0.0f, 0.0f, 1.0f),
+		m_camera->GetViewMatrix(),
+		m_camera->GetProjectionMatrix(),
+		lambda);
 }

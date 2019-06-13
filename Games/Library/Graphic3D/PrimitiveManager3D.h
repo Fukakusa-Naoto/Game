@@ -252,6 +252,21 @@ namespace Library
 			//! @return    なし
 			//--------------------------------------------------------------
 			void DrawSphere(const DirectX::SimpleMath::Vector3& position, float radius, const DirectX::XMFLOAT4& color, const DirectX::SimpleMath::Matrix& view, const DirectX::SimpleMath::Matrix& projection, bool wireframeFlag = false);
+
+
+			//--------------------------------------------------------------
+			//! @summary   球の描画
+			//!
+			//! @parameter [position] 中心座標
+			//! @parameter [radius] 半径
+			//! @parameter [color] 色
+			//! @parameter [view] ビュー行列
+			//! @parameter [projection] 射影行列
+			//! @parameter [lambda] レンダリング・パイプライン構築のラムダ式関数
+			//!
+			//! @return    なし
+			//--------------------------------------------------------------
+			void DrawSphere(const DirectX::SimpleMath::Vector3& position, float radius, const DirectX::XMFLOAT4& color, const DirectX::SimpleMath::Matrix& view, const DirectX::SimpleMath::Matrix& projection, std::function<void()> lambda);
 		};
 	}
 }

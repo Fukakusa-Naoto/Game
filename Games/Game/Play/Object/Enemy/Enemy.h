@@ -50,6 +50,10 @@ namespace Motos
 					Library::Physics::RigidBody* m_rigidBody;
 					// 敵管理クラス
 					Utility::EnemyManager* m_enemyManager;
+					// デバイス・コンテキスト・インターフェイス
+					ID3D11DeviceContext* m_deviceContext;
+					// ピクセルシェーダー・インターフェイス
+					ID3D11PixelShader* m_pixelShader;
 
 
 					// <コンストラクタ>

@@ -40,6 +40,10 @@ namespace Motos
 				Library::Collision::SphereShape* m_sphereShape;
 				// 物理演算コンポーネント
 				Library::Physics::RigidBody* m_rigidBody;
+				// デバイス・コンテキスト・インターフェイス
+				ID3D11DeviceContext* m_deviceContext;
+				// ピクセルシェーダー・インターフェイス
+				ID3D11PixelShader* m_pixelShader;
 
 
 				// <コンストラクタ>

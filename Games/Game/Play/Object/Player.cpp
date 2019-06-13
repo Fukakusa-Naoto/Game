@@ -17,6 +17,7 @@
 #include "../../../Library/Collision/CollisionManager.h"
 #include "../../Utility/ObjactTag.h"
 #include "../../../Library/Camera/Camera.h"
+#include "../../../Library/Common/DeviceResources.h"
 
 
 // usingディレクティブ =====================================================
@@ -36,7 +37,9 @@ Motos::Play::Object::Player::Player() :
 	GameObject(),
 	m_primitiveRender(nullptr),
 	m_sphereShape(nullptr),
-	m_rigidBody(nullptr)
+	m_rigidBody(nullptr),
+	m_deviceContext(nullptr),
+	m_pixelShader(nullptr)
 {
 	// 何もしない
 }
@@ -68,6 +71,7 @@ Motos::Play::Object::Player::~Player()
 //--------------------------------------------------------------------
 void Motos::Play::Object::Player::Start()
 {
+	m_deviceContext = Common::DeviceResources::GetInstance()->GetD3DDeviceContext();
 	m_primitiveRender = Graphic3D::PrimitiveManager3D::GetInstance();
 
 	m_controller = new Controller::PlayerController(this, m_transform);
@@ -81,6 +85,9 @@ void Motos::Play::Object::Player::Start()
 
 	// タグの登録
 	m_tag = ObjectTag::PLAYER;
+
+	// ピクセルシェーダーのインスタンスの取得
+	m_pixelShader = Shader::ShaderManager::GetInstance()->LoadPixelShader(L"LightingPixelShader");
 }
 
 
@@ -108,5 +115,12 @@ void Motos::Play::Object::Player::Update(const Common::StepTimer& timer)
 //--------------------------------------------------------------------
 void Motos::Play::Object::Player::Draw()
 {
-	m_primitiveRender->DrawSphere(m_transform.GetPosition(), 0.5f, Color(0.0f, 0.0f, 1.0f, 1.0f), m_camera->GetViewMatrix(), m_camera->GetProjectionMatrix(), false);
+	// パイプライン構築のラムダ式関数
+	function<void()> lambda = [&]()
+	{
+		// ピクセルシェーダー
+		m_deviceContext->PSSetShader(m_pixelShader, nullptr, 0);
+	};
+
+	m_primitiveRender->DrawSphere(m_transform.GetPosition(), 0.5f, Color(0.0f, 0.0f, 1.0f, 1.0f), m_camera->GetViewMatrix(), m_camera->GetProjectionMatrix(), lambda);
 }
