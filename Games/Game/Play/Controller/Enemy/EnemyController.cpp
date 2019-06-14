@@ -43,6 +43,8 @@ using namespace Library;
 Motos::Play::Controller::EnemyController::EnemyController(System::GameObject* gameObject, Math::Transform& transform) :
 	ControllerBase(gameObject, transform),
 	m_velocity(Vector3::Zero),
+	m_target(nullptr),
+	m_enemyManager(nullptr),
 	m_isActive(true),
 	m_isFalling(false)
 {

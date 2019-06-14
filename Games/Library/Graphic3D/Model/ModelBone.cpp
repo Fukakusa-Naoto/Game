@@ -26,7 +26,8 @@ using namespace Library;
 //!
 //! @parameter [void] なし
 //--------------------------------------------------------------------
-Graphic3D::Model::ModelBone::ModelBone()
+Graphic3D::Model::ModelBone::ModelBone() :
+	m_parentNumber(0)
 {
 
 }

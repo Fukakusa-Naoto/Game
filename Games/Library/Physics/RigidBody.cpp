@@ -31,11 +31,13 @@ using namespace Library;
 //! @summary   コンストラクタ
 //!
 //! @parameter [transform] 座標変換コンポーネント
+//! @parameter [collisionShape] 衝突判定用シェイプ
 //--------------------------------------------------------------------
 Physics::RigidBody::RigidBody(Math::Transform& transform, Collision::CollisionShape* collisionShape) :
 	m_transform(transform),
 	m_velocity(Vector3::Zero),
-	m_isCollide(true)
+	m_isCollide(true),
+	m_fallingTime(0.0f)
 {
 	// 物理マネージャーのインスタンスの取得
 	m_physicsManager = PhysicsManager::GetInstance();

@@ -28,7 +28,9 @@ using namespace Library;
 //!
 //! @parameter [void] なし
 //--------------------------------------------------------------------
-Input::KeyboardUtil::KeyboardUtil()
+Input::KeyboardUtil::KeyboardUtil() :
+	m_keyboard(nullptr),
+	m_state(Keyboard::State())
 {
 	m_keyboard = new Keyboard();
 }

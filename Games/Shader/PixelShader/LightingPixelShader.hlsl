@@ -15,7 +15,7 @@ float4 main(PS_INPUT input) : SV_TARGET
 
 	float4 color= input.color * saturate(dot(input.normal, light));
 
-	// ライトが当たっていない分の色を付ける
+	// ライトが当たっていない部分の色を付ける
 	color += float4(input.color.rgb * 0.5f, input.color.a);
 	return color;
 }

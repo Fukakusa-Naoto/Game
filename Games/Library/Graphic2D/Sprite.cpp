@@ -46,7 +46,11 @@ Graphic2D::Sprite::Sprite() :
 	m_color(Colors::White),
 	m_rotation(0.0f),
 	m_anchorPoint(Vector2::Zero),
-	m_scale(Vector2::One)
+	m_scale(Vector2::One),
+	m_pixelShader(nullptr),
+	m_rect(RECT()),
+	m_texture(nullptr),
+	m_vertexShader(nullptr)
 {
 	// インスタンスの取得
 	m_device = Common::DeviceResources::GetInstance()->GetD3DDevice();

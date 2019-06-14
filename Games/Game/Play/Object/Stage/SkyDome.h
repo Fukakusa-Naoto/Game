@@ -58,6 +58,16 @@ namespace Motos
 						DirectX::SimpleMath::Matrix	view;
 						DirectX::SimpleMath::Matrix	projection;
 						DirectX::XMFLOAT4 time;
+
+						// <コンストラクタ>
+						ConstBuffer() :
+							world(DirectX::SimpleMath::Matrix::Identity),
+							view(DirectX::SimpleMath::Matrix::Identity),
+							projection(DirectX::SimpleMath::Matrix::Identity),
+							time(DirectX::XMFLOAT4(0.0f, 0.0f, 0.0f, 0.0f))
+						{
+							// 何もしない
+						}
 					};
 
 

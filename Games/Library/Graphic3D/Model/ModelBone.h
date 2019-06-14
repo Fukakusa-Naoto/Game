@@ -32,7 +32,7 @@ namespace Library
 				// ボーンの名前
 				std::string m_name;
 				// 親のボーン番号
-				unsigned int parentNumber;
+				unsigned int m_parentNumber;
 
 
 				// <コンストラクタ>

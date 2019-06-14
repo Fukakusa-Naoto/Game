@@ -82,7 +82,9 @@ namespace Library
 				SkinVertexBuffer() :
 					position(DirectX::SimpleMath::Vector3::Zero),
 					texcoord(-DirectX::SimpleMath::Vector2::One),
-					normal(DirectX::SimpleMath::Vector3::Zero)
+					normal(DirectX::SimpleMath::Vector3::Zero),
+					boneIndex(),
+					boneWeight(0)
 				{
 					// 何もしない
 				}
@@ -119,6 +121,13 @@ namespace Library
 				std::wstring textureName;				// テクスチャ名
 				DirectX::SimpleMath::Vector4 diffuse;	// 減衰色
 				Utility::Texture* texture;				// テクスチャ
+
+				Material() :
+					diffuse(DirectX::SimpleMath::Vector4::Zero),
+					texture(nullptr)
+				{
+					// 何もしない
+				}
 			};
 
 

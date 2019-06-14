@@ -42,7 +42,8 @@ const int Motos::Play::Object::UI::Number::DIGIT_NUMBER = 9;
 //--------------------------------------------------------------------
 Motos::Play::Object::UI::Number::Number() :
 	m_position(Vector2::Zero),
-	m_color(Colors::White)
+	m_color(Colors::White),
+	m_viewport(D3D11_VIEWPORT())
 {
 	m_sprite = new Graphic2D::Sprite(L"Resources/Textures/UI/UIStates.png");
 	m_sprite->SetScale(UIFrame::PROPORTION);

@@ -123,9 +123,10 @@ namespace Library
 				// <コンストラクタ>
 			public:
 				PMXVertexSkinningBDEF2() :
-					boneWeight(0.0f)
+					boneWeight(0.0f),
+					boneIndex()
 				{
-					boneIndex[0] = boneIndex[1] = 0;
+					// 何もしない
 				}
 
 
@@ -151,10 +152,11 @@ namespace Library
 
 				// <コンストラクタ>
 			public:
-				PMXVertexSkinningBDEF4()
+				PMXVertexSkinningBDEF4() :
+					boneIndex(),
+					boneWeight()
 				{
-					boneIndex[0] = boneIndex[1] = boneIndex[2] = boneIndex[3] = 0;
-					boneWeight[0] = boneWeight[1] = boneWeight[2] = boneWeight[3] = 0.0f;
+					// 何もしない
 				}
 
 
@@ -189,16 +191,13 @@ namespace Library
 
 				// <コンストラクタ>
 				PMXVertexSkinningSDEF() :
-					boneWeight(0.0f)
+					boneWeight(0.0f),
+					boneIndex(),
+					sdefC(),
+					sdefR0(),
+					sdefR1()
 				{
-					boneIndex[0] = boneIndex[1] = 0;
-
-					for (int i = 0; i < 3; ++i)
-					{
-						sdefC[i] = 0.0f;
-						sdefR0[i] = 0.0f;
-						sdefR1[i] = 0.0f;
-					}
+					// 何もしない
 				}
 
 
@@ -228,10 +227,11 @@ namespace Library
 
 				// <コンストラクタ>
 			public:
-				PMXVertexSkinningQDEF()
+				PMXVertexSkinningQDEF() :
+					boneIndex(),
+					boneWeight()
 				{
-					boneIndex[0] = boneIndex[1] = boneIndex[2] = boneIndex[3] = 0;
-					boneWeight[0] = boneWeight[1] = boneWeight[2] = boneWeight[3] = 0.0f;
+					// 何もしない
 				}
 
 
@@ -272,23 +272,15 @@ namespace Library
 
 				// <コンストラクタ>
 				PMXVertex() :
+					position(),
+					normal(),
+					uv(),
+					uvAddition(),
+					skinningType(),
+					skinning(nullptr),
 					edge(0.0f)
 				{
-					uv[0] = uv[1] = 0.0f;
-
-					for (int i = 0; i < 3; ++i)
-					{
-						position[i] = 0.0f;
-						normal[i] = 0.0f;
-					}
-
-					for (int i = 0; i < 4; ++i)
-					{
-						for (int j = 0; j < 4; ++j)
-						{
-							uvAddition[i][j] = 0.0f;
-						}
-					}
+					// 何もしない
 				}
 
 
@@ -348,19 +340,13 @@ namespace Library
 					sphereOpMode(0),
 					commonToonFlag(0),
 					toonTextureIndex(0),
-					indexCount(0)
+					indexCount(0),
+					specular(),
+					ambient(),
+					edgeColor(),
+					diffuse()
 				{
-					for (int i = 0; i < 3; ++i)
-					{
-						specular[i] = 0.0f;
-						ambient[i] = 0.0f;
-						edgeColor[i] = 0.0f;
-					}
-
-					for (int i = 0; i < 4; ++i)
-					{
-						diffuse[i] = 0.0f;
-					}
+					// 何もしない
 				}
 			};
 
@@ -381,13 +367,11 @@ namespace Library
 				// <コンストラクタ>
 				PMXIkLink() :
 					linkTarget(0),
-					angleLock(0)
+					angleLock(0),
+					maxRadian(),
+					minRadian()
 				{
-					for (int i = 0; i < 3; ++i)
-					{
-						maxRadian[i] = 0.0f;
-						minRadian[i] = 0.0f;
-					}
+					// 何もしない
 				}
 			};
 
@@ -447,16 +431,14 @@ namespace Library
 					ikTargetBoneIndex(0),
 					ikLoop(0),
 					ikLoopAngleLimit(0.0f),
-					ikLinkCount(0)
+					ikLinkCount(0),
+					position(),
+					offset(),
+					lockAxisOrientation(),
+					localAxisOrientationX(),
+					localAxisOrientationY()
 				{
-					for (int i = 0; i < 3; ++i)
-					{
-						position[i] = 0.0f;
-						offset[i] = 0.0f;
-						lockAxisOrientation[i] = 0.0f;
-						localAxisOrientationX[i] = 0.0f;
-						localAxisOrientationY[i] = 0.0f;
-					}
+					// 何もしない
 				}
 			};
 
@@ -499,12 +481,10 @@ namespace Library
 
 				// <コンストラクタ>
 				PMXMorphVertexOffset() :
-					vertexIndex(0)
+					vertexIndex(0),
+					positionOffset()
 				{
-					for (int i = 0; i < 3; ++i)
-					{
-						positionOffset[i] = 0.0f;
-					}
+					// 何もしない
 				}
 			};
 
@@ -519,12 +499,10 @@ namespace Library
 
 				// <コンストラクタ>
 				PMXMorphUVOffset() :
-					vertexIndex(0)
+					vertexIndex(0),
+					uvOffset()
 				{
-					for (int i = 0; i < 4; ++i)
-					{
-						uvOffset[i] = 0.0f;
-					}
+					// 何もしない
 				}
 			};
 
@@ -538,17 +516,11 @@ namespace Library
 
 				// <コンストラクタ>
 				PMXMorphBoneOffset() :
-					boneIndex(0)
+					boneIndex(0),
+					translation(),
+					rotation()
 				{
-					for (int i = 0; i < 3; ++i)
-					{
-						translation[i] = 0.0f;
-					}
-
-					for (int i = 0; i < 4; ++i)
-					{
-						rotation[i] = 0.0f;
-					}
+					// 何もしない
 				}
 			};
 
@@ -581,23 +553,19 @@ namespace Library
 
 				// <コンストラクタ>
 				PMXMorphMaterialOffset() :
+					materialIndex(0),
+					offsetOperation(0),
 					specularity(0.0f),
-					edgeSize(0.0f)
+					edgeSize(0.0f),
+					specular(),
+					ambient(),
+					diffuse(),
+					edgeColor(),
+					textureArgb(),
+					sphereTextureArgb(),
+					toonTextureArgb()
 				{
-					for (int i = 0; i < 3; ++i)
-					{
-						specular[i] = 0.0f;
-						ambient[i] = 0.0f;
-					}
-
-					for (int i = 0; i < 4; ++i)
-					{
-						diffuse[i] = 0.0f;
-						edgeColor[i] = 0.0f;
-						textureArgb[i] = 0.0f;
-						sphereTextureArgb[i] = 0.0f;
-						toonTextureArgb[i] = 0.0f;
-					}
+					// 何もしない
 				}
 			};
 
@@ -648,13 +616,11 @@ namespace Library
 				// <コンストラクタ>
 				PMXMorphImpulseOffset() :
 					rigidbodyIndex(0),
-					isLocal(0)
+					isLocal(0),
+					velocity(),
+					angularTorque()
 				{
-					for (int i = 0; i < 3; ++i)
-					{
-						velocity[i] = 0.0f;
-						angularTorque[i] = 0.0f;
-					}
+					// 何もしない
 				}
 			};
 
@@ -690,7 +656,9 @@ namespace Library
 
 				// <コンストラクタ>
 				PMXMorph() :
-					offsetCount(0)
+					offsetCount(0),
+					category(),
+					morphType()
 				{
 					// 何もしない
 				}
@@ -786,14 +754,12 @@ namespace Library
 					rotationAttenuation(0.0f),
 					repulsion(0.0f),
 					friction(0.0f),
-					physicsCalcType(0)
+					physicsCalcType(0),
+					size(),
+					position(),
+					orientation()
 				{
-					for (int i = 0; i < 3; ++i)
-					{
-						size[i] = 0.0f;
-						position[i] = 0.0f;
-						orientation[i] = 0.0f;
-					}
+					// 何もしない
 				}
 			};
 
@@ -822,20 +788,18 @@ namespace Library
 
 
 				// <コンストラクタ>
-				PMXJointParam()
+				PMXJointParam() :
+					rigidbody(),
+					position(),
+					orientaiton(),
+					moveLimitationMax(),
+					moveLimitationMin(),
+					rotationLimitationMax(),
+					rotationLimitationMin(),
+					springMoveCoefficient(),
+					springRotationCoefficient()
 				{
-					rigidbody[0] = rigidbody[1] = 0;
-					for (int i = 0; i < 3; ++i)
-					{
-						position[i] = 0.0f;
-						orientaiton[i] = 0.0f;
-						moveLimitationMin[i] = 0.0f;
-						moveLimitationMax[i] = 0.0f;
-						rotationLimitationMin[i] = 0.0f;
-						rotationLimitationMax[i] = 0.0f;
-						springMoveCoefficient[i] = 0.0f;
-						springRotationCoefficient[i] = 0.0f;
-					}
+					// 何もしない
 				}
 			};
 
@@ -955,7 +919,8 @@ namespace Library
 					AST(0.0f),
 					VST(0.0f),
 					anchorCount(0),
-					pinVertexCount(0)
+					pinVertexCount(0),
+					flag()
 				{
 					// 何もしない
 				}

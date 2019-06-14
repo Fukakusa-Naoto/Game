@@ -47,7 +47,9 @@ Graphic2D::PrimitiveManager2D::PrimitiveManager2D() :
 	m_deviceContext(nullptr),
 	m_commonStates(nullptr),
 	m_vertexShader(nullptr),
-	m_pixelShader(nullptr)
+	m_pixelShader(nullptr),
+	m_defaultViewport(D3D11_VIEWPORT()),
+	m_viewport(D3D11_VIEWPORT())
 {
 	// 何もしない
 }

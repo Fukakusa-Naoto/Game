@@ -28,7 +28,10 @@ using namespace Library;
 //!
 //! @parameter [void] なし
 //--------------------------------------------------------------------
-Input::MouseUtil::MouseUtil()
+Input::MouseUtil::MouseUtil() :
+	m_mouse(nullptr),
+	m_state(Mouse::State()),
+	m_buttonStateTracker(Mouse::ButtonStateTracker())
 {
 	m_mouse = new Mouse();
 	m_mouse->SetMode(Mouse::Mode::MODE_ABSOLUTE);

@@ -38,7 +38,17 @@ const vector<D3D11_INPUT_ELEMENT_DESC> Motos::Play::Object::Stage::SkyDome::INPU
 //!
 //! @parameter [void] なし
 //--------------------------------------------------------------------
-Motos::Play::Object::Stage::SkyDome::SkyDome()
+Motos::Play::Object::Stage::SkyDome::SkyDome() :
+	m_device(nullptr),
+	m_deviceContext(nullptr),
+	m_commonStates(nullptr),
+	m_vertexShader(nullptr),
+	m_geometryShader(nullptr),
+	m_pixelShader(nullptr),
+	m_texture(nullptr),
+	m_constBuffer(nullptr),
+	m_vertexBuffer(nullptr),
+	m_camera(nullptr)
 {
 	// 何もしない
 }

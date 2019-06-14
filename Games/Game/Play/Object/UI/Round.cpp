@@ -31,7 +31,8 @@ using namespace Library;
 //! @parameter [void] なし
 //--------------------------------------------------------------------
 Motos::Play::Object::UI::Round::Round() :
-	m_position(Vector2::Zero)
+	m_position(Vector2::Zero),
+	m_viewport(D3D11_VIEWPORT())
 {
 	m_hyphen = new Graphic2D::Sprite(L"Resources/Textures/UI/UIStates.png");
 
